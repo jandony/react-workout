@@ -19,7 +19,7 @@ import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 
 const App = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -36,7 +36,7 @@ const App = () => {
           </Paper>
           <Switch>
             <Route exact path="/" component={ExerciseFinder} />
-            <Route exact path="/record" component={RecordWO} />
+            {/* <Route exact path="/record" component={RecordWO} /> */}
           </Switch>
         </BrowserRouter>
       </ThemeProvider>

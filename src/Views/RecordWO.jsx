@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 
 export default function RecordWO() {
   return (
-    <Grid container spacing={3} direction="column" justify="center" alignItems="center" style={{ marginTop: "1rem", height: "75vh" }}>
+    <Grid container direction="column" justify="center" alignItems="center" style={{ marginTop: "1rem", height: "75vh" }}>
       <Grid item>
         <Typography variant="h2">Record a Workout</Typography>
       </Grid>

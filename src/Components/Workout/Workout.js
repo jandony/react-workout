@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 export const Workout = ({ name, description, image }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Grid item xs={12} md={6}>

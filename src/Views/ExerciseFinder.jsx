@@ -26,14 +26,14 @@ export default function ExerciseFinder() {
   const lowerImage = "https://www.bodybuilding.com/exercises/exerciseImages/sequences/700/Male/l/700_1.jpg";
 
   return (
-    <Grid container spacing={3} style={{ marginTop: "1rem" }}>
+    <Grid container style={{ marginTop: "1rem" }}>
       <Grid item sm={5}>
         <Typography variant="h2" style={{ padding: "0.5em" }}>
           Upper Body
         </Typography>
         <Grid container direction="row">
-          {upperWorkouts.map((workout) => {
-            return <Workout name={workout.name} description={workout.description} body={workout.body} image={upperImage} />;
+          {upperWorkouts.map((workout, index) => {
+            return <Workout key={index} name={workout.name} description={workout.description} body={workout.body} image={upperImage} />;
           })}
         </Grid>
       </Grid>
@@ -47,8 +47,8 @@ export default function ExerciseFinder() {
           Lower Body
         </Typography>
         <Grid container direction="row">
-          {lowerWorkouts.map((workout) => {
-            return <Workout name={workout.name} description={workout.description} body={workout.body} image={lowerImage} />;
+          {lowerWorkouts.map((workout, index) => {
+            return <Workout key={index} name={workout.name} description={workout.description} body={workout.body} image={lowerImage} />;
           })}
         </Grid>
       </Grid>

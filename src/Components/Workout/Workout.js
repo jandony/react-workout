@@ -1,10 +1,8 @@
 import React from "react";
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -13,37 +11,60 @@ const useStyles = makeStyles((theme) => ({
   workoutCard: {
     margin: "1em",
     [theme.breakpoints.down("sm")]: {
-      marginBottom: "1em",
+      marginBottom: "0em",
     },
   },
   root: {
     maxWidth: 345,
   },
   media: {
-    height: 200,
+    height: 100,
+    width: 100,
   },
   cardText: {
-    textAlign: "center",
+    textAlign: "left",
+  },
+  cardContentContainer: {
+    height: "100%",
+    padding: "1rem",
+  },
+  muscleGroup: {
+    fontSize: "1.5em",
+  },
+  bodySection: {
+    textAlign: "right",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
 }));
 
-export const Workout = ({ name, description, image }) => {
+export const Workout = ({ name, body, image }) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12}>
       <Card className={classes.workoutCard}>
         <CardActionArea>
-          <CardMedia className={classes.media} image={image} title="Contemplative Reptile" />
-          <CardContent className={classes.cardText}>
-            <Typography gutterBottom variant="h5" component="h2">
-              {name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {description}
-            </Typography>
-          </CardContent>
+          <Grid container direction="row">
+            <Grid item sm={2}>
+              <CardMedia className={classes.media} image={image} title="Contemplative Reptile" />
+            </Grid>
+            <Grid item sm={10}>
+              <Grid container direction="row" alignItems="center" className={classes.cardContentContainer}>
+                <Grid item sm={8}>
+                  <Typography variant="p" component="p" className={classes.muscleGroup}>
+                    {name}
+                  </Typography>
+                </Grid>
+                <Grid item sm={4}>
+                  <Typography variant="body2" color="textSecondary" component="p" className={classes.bodySection}>
+                    {body}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
         </CardActionArea>
       </Card>
     </Grid>

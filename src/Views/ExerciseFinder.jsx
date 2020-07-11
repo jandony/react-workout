@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { shadows } from "@material-ui/system";
 
 // body images
 import Neck from "../Assets/Images/neck.jpg";
@@ -57,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExerciseFinder() {
+export default function ExerciseFinder({ upperWorkouts, lowerWorkouts }) {
   const classes = useStyles();
 
   const [upperWorkouts, setUpperWorkouts] = useState([
@@ -91,7 +90,14 @@ export default function ExerciseFinder() {
           </Typography>
           <Grid container direction="row">
             {upperWorkouts.map((workout, index) => {
-              return <Workout key={index} name={workout.name} body={workout.body} image={workout.image} />;
+              return (
+                <Workout
+                  key={index}
+                  name={workout.name}
+                  body={workout.body}
+                  image={workout.image}
+                />
+              );
             })}
           </Grid>
         </Grid>
@@ -103,7 +109,14 @@ export default function ExerciseFinder() {
           </Typography>
           <Grid container direction="row">
             {lowerWorkouts.map((workout, index) => {
-              return <Workout key={index} name={workout.name} body={workout.body} image={workout.image} />;
+              return (
+                <Workout
+                  key={index}
+                  name={workout.name}
+                  body={workout.body}
+                  image={workout.image}
+                />
+              );
             })}
           </Grid>
         </Grid>

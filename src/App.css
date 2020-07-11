@@ -1,3 +1,7 @@
+.App {
+  display: flex;
+}
+
 .Workouts {
   display: flex;
   flex-direction: column;

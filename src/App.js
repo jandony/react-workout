@@ -76,10 +76,7 @@ const App = () => {
     },
   ]);
   return (
-    <div
-      className="App"
-      style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}
-    >
+    <div className="App" style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <AppBar className={classes.appBar}>

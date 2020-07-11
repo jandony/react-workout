@@ -10,8 +10,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 const useStyles = makeStyles((theme) => ({
   workoutCard: {
     margin: "1em",
+    marginBottom: "0em",
     [theme.breakpoints.down("sm")]: {
-      marginBottom: "0em",
+      marginLeft: 0,
+      marginRight: 0,
     },
   },
   root: {
@@ -31,12 +33,6 @@ const useStyles = makeStyles((theme) => ({
   muscleGroup: {
     fontSize: "1.5em",
   },
-  bodySection: {
-    textAlign: "right",
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-  },
 }));
 
 export const Workout = ({ name, body, image }) => {
@@ -47,18 +43,17 @@ export const Workout = ({ name, body, image }) => {
       <Card className={classes.workoutCard}>
         <CardActionArea>
           <Grid container direction="row">
-            <Grid item sm={2}>
+            <Grid item sm={3}>
               <CardMedia className={classes.media} image={image} title="Contemplative Reptile" />
             </Grid>
-            <Grid item sm={10}>
-              <Grid container direction="row" alignItems="center" className={classes.cardContentContainer}>
-                <Grid item sm={8}>
+
+            <Grid item sm={9}>
+              <Grid container alignItems="center" className={classes.cardContentContainer}>
+                <Grid item>
                   <Typography variant="p" component="p" className={classes.muscleGroup}>
                     {name}
                   </Typography>
-                </Grid>
-                <Grid item sm={4}>
-                  <Typography variant="body2" color="textSecondary" component="p" className={classes.bodySection}>
+                  <Typography variant="body2" color="textSecondary" component="p">
                     {body}
                   </Typography>
                 </Grid>

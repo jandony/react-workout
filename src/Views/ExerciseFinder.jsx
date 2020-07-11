@@ -1,8 +1,27 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
+import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import { shadows } from "@material-ui/system";
+
+// body images
+import Neck from "../Assets/Images/neck.jpg";
+import Traps from "../Assets/Images/traps.jpg";
+import Shoulders from "../Assets/Images/shoulders.jpg";
+import Chest from "../Assets/Images/chest.jpg";
+import Abs from "../Assets/Images/abs.jpg";
+import Lats from "../Assets/Images/lats.jpg";
+import Back from "../Assets/Images/back.jpg";
+import Biceps from "../Assets/Images/biceps.jpg";
+import Triceps from "../Assets/Images/triceps.jpg";
+import Forearms from "../Assets/Images/forearms.jpg";
+
+import Glutes from "../Assets/Images/glutes.jpg";
+import Quads from "../Assets/Images/quads.jpg";
+import Hamstrings from "../Assets/Images/hamstrings.jpg";
+import Calves from "../Assets/Images/calves.jpg";
 
 // main component
 import { Workout } from "../Components/Workout/Workout";
@@ -15,62 +34,80 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  exerciseContainer: {
+    marginTop: "1rem",
+    paddingTop: "6rem",
+    paddingBottom: "10rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0,
+    },
+  },
+  bodyTitle: {
+    padding: "0.5em",
+    position: "sticky",
+    top: 72,
+    paddingTop: 25,
+    [theme.breakpoints.down("sm")]: {
+      top: 0,
+      paddingTop: 25,
+    },
+    fontSize: "1rem",
+    backgroundColor: "lightgrey",
+    zIndex: 1000,
+  },
 }));
 
 export default function ExerciseFinder() {
   const classes = useStyles();
 
   const [upperWorkouts, setUpperWorkouts] = useState([
-    { name: "Neck", body: "upper" },
-    { name: "Traps (trapezius)", body: "upper" },
-    { name: "Shoulders (deltoids)", body: "upper" },
-    { name: "Chest (pectoralis", body: "upper" },
-    { name: "Abs (abdominis)", body: "upper" },
-    { name: "Lats (latissimus dorsi)", body: "upper" },
-    { name: "Middle Back", body: "upper" },
-    { name: "Lower Back", body: "upper" },
-    { name: "Biceps", body: "upper" },
-    { name: "Triceps", body: "upper" },
-    { name: "Forearms", body: "upper" },
+    { name: "Neck", body: "upper", image: Neck },
+    { name: "Traps (trapezius)", body: "upper", image: Traps },
+    { name: "Shoulders (deltoids)", body: "upper", image: Shoulders },
+    { name: "Chest (pectoralis", body: "upper", image: Chest },
+    { name: "Abs (abdominis)", body: "upper", image: Abs },
+    { name: "Lats (latissimus dorsi)", body: "upper", image: Lats },
+    { name: "Middle Back", body: "upper", image: Back },
+    { name: "Lower Back", body: "upper", image: Back },
+    { name: "Biceps", body: "upper", image: Biceps },
+    { name: "Triceps", body: "upper", image: Triceps },
+    { name: "Forearms", body: "upper", image: Forearms },
   ]);
 
   const [lowerWorkouts, setLowerWorkouts] = useState([
-    { name: "Glutes (gluteus maximus)", body: "lower" },
-    { name: "Quads (quadriceps)", body: "lower" },
-    { name: "Hamstrings", body: "lower" },
-    { name: "Calves", body: "lower" },
+    { name: "Glutes (gluteus maximus)", body: "lower", image: Glutes },
+    { name: "Quads (quadriceps)", body: "lower", image: Quads },
+    { name: "Hamstrings", body: "lower", image: Hamstrings },
+    { name: "Calves", body: "lower", image: Calves },
   ]);
 
-  const upperImage = "https://www.bodybuilding.com/exercises/exerciseImages/sequences/35/Male/l/35_1.jpg";
-  const lowerImage = "https://www.bodybuilding.com/exercises/exerciseImages/sequences/700/Male/l/700_1.jpg";
-
   return (
-    <Grid container style={{ marginTop: "1rem" }}>
-      <Grid item sm={5}>
-        <Typography variant="h2" style={{ padding: "0.5em" }}>
-          Upper Body
-        </Typography>
-        <Grid container direction="row">
-          {upperWorkouts.map((workout, index) => {
-            return <Workout key={index} name={workout.name} body={workout.body} image={upperImage} />;
-          })}
+    <Container maxWidth="md">
+      <Grid container className={classes.exerciseContainer}>
+        <Grid item sm={6}>
+          <Typography variant="h2" className={classes.bodyTitle} boxShadow={3}>
+            Upper Body
+            <hr />
+          </Typography>
+          <Grid container direction="row">
+            {upperWorkouts.map((workout, index) => {
+              return <Workout key={index} name={workout.name} body={workout.body} image={workout.image} />;
+            })}
+          </Grid>
+        </Grid>
+
+        <Grid item sm={6}>
+          <Typography variant="h2" className={classes.bodyTitle}>
+            Lower Body
+            <hr />
+          </Typography>
+          <Grid container direction="row">
+            {lowerWorkouts.map((workout, index) => {
+              return <Workout key={index} name={workout.name} body={workout.body} image={workout.image} />;
+            })}
+          </Grid>
         </Grid>
       </Grid>
-
-      <Grid item container sm={2} direction="column" alignItems="center" justify="center" className={classes.orContainer}>
-        <Typography variant="h2">OR</Typography>
-      </Grid>
-
-      <Grid item sm={5}>
-        <Typography variant="h2" style={{ padding: "0.5em" }}>
-          Lower Body
-        </Typography>
-        <Grid container direction="row">
-          {lowerWorkouts.map((workout, index) => {
-            return <Workout key={index} name={workout.name} body={workout.body} image={lowerImage} />;
-          })}
-        </Grid>
-      </Grid>
-    </Grid>
+    </Container>
   );
 }

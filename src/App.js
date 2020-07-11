@@ -23,6 +23,23 @@ import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 import "./App.css";
 
+// body images
+import Neck from "./Assets/Images/neck.jpg";
+import Traps from "./Assets/Images/traps.jpg";
+import Shoulders from "./Assets/Images/shoulders.jpg";
+import Chest from "./Assets/Images/chest.jpg";
+import Abs from "./Assets/Images/abs.jpg";
+import Lats from "./Assets/Images/lats.jpg";
+import Back from "./Assets/Images/back.jpg";
+import Biceps from "./Assets/Images/biceps.jpg";
+import Triceps from "./Assets/Images/triceps.jpg";
+import Forearms from "./Assets/Images/forearms.jpg";
+
+import Glutes from "./Assets/Images/glutes.jpg";
+import Quads from "./Assets/Images/quads.jpg";
+import Hamstrings from "./Assets/Images/hamstrings.jpg";
+import Calves from "./Assets/Images/calves.jpg";
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: "fixed",
@@ -43,56 +60,67 @@ const App = () => {
       name: "Neck",
       body: "upper",
       exercises: [{ name: "Neck Ex 1" }, { name: "Neck Ex 2" }],
+      image: Neck,
     },
     {
       name: "Traps (trapezius)",
       body: "upper",
       exercises: [{ name: "Traps Ex 1" }, { name: "Traps Ex 2" }],
+      image: Traps,
     },
     {
       name: "Shoulders (deltoids)",
       body: "upper",
       exercises: [{ name: "Shoulders Ex 1" }, { name: "Shoulders Ex 2" }],
+      image: Shoulders,
     },
     {
       name: "Chest (pectoralis",
       body: "upper",
       exercises: [{ name: "Chest Ex 1" }, { name: "Chest Ex 2" }],
+      image: Chest,
     },
     {
       name: "Abs (abdominis)",
       body: "upper",
       exercises: [{ name: "Abs Ex 1" }, { name: "Abs Ex 2" }],
+      image: Abs,
     },
     {
       name: "Lats (latissimus dorsi)",
       body: "upper",
       exercises: [{ name: "Lats Ex 1" }, { name: "Lats Ex 2" }],
+      image: Lats,
     },
     {
       name: "Middle Back",
       body: "upper",
       exercises: [{ name: "Middle Back Ex 1" }, { name: "Middle Back Ex 2" }],
+      image: Back,
     },
     {
       name: "Lower Back",
       body: "upper",
       exercises: [{ name: "Lower Back Ex 1" }, { name: "Lower Back Ex 2" }],
+      image: Back,
     },
     {
       name: "Biceps",
       body: "upper",
       exercises: [{ name: "Biceps Ex 1" }, { name: "Biceps Ex 2" }],
+      image: Biceps,
     },
     {
       name: "Triceps",
       body: "upper",
       exercises: [{ name: "Triceps Ex 1" }, { name: "Triceps Ex 2" }],
+      image: Triceps,
     },
     {
       name: "Forearms",
       body: "upper",
       exercises: [{ name: "Forearms Ex 1" }, { name: "Forearms Ex 2" }],
+      image: Forearms,
     },
   ]);
 
@@ -101,21 +129,25 @@ const App = () => {
       name: "Glutes (gluteus maximus)",
       body: "lower",
       exercises: [{ name: "Glutes Ex 1" }, { name: "Glutes Ex 2" }],
+      image: Glutes,
     },
     {
       name: "Quads (quadriceps)",
       body: "lower",
       exercises: [{ name: "Quads Ex 1" }, { name: "Quads Ex 2" }],
+      image: Quads,
     },
     {
       name: "Hamstrings",
       body: "lower",
       exercises: [{ name: "Hamstrings Ex 1" }, { name: "Hamstrings Ex 2" }],
+      image: Hamstrings,
     },
     {
       name: "Calves",
       body: "lower",
       exercises: [{ name: "Calves Ex 1" }, { name: "Calves Ex 2" }],
+      image: Calves,
     },
   ]);
 
@@ -129,9 +161,6 @@ const App = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="App" style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}>
-=======
     <div
       className="App"
       style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}
@@ -141,7 +170,7 @@ const App = () => {
         upperWorkouts={upperWorkouts}
         lowerWorkouts={lowerWorkouts}
       />
->>>>>>> ad81a8e... Build Sidebar component with built in navigation
+
       <ThemeProvider theme={theme}>
         <Router history={history}>
           <AppBar className={classes.appBar}>

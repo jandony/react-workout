@@ -55,7 +55,7 @@ const App = () => {
 
   const [results, setResults] = useState(null);
 
-  const [selectedExercises] = useState([]);
+  const [selectedExercises, setSelectedExercises] = useState([]);
   const [totalExercises, setTotal] = useState(0);
 
   const [upperWorkouts, setUpperWorkouts] = useState([
@@ -200,8 +200,15 @@ const App = () => {
   };
 
   return (
-    <div className="App" style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}>
-      <SideBar findResults={findResults} upperWorkouts={upperWorkouts} lowerWorkouts={lowerWorkouts} />
+    <div
+      className="App"
+      style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}
+    >
+      <SideBar
+        findResults={findResults}
+        upperWorkouts={upperWorkouts}
+        lowerWorkouts={lowerWorkouts}
+      />
 
       <ThemeProvider theme={theme}>
         <Router history={history}>
@@ -209,9 +216,30 @@ const App = () => {
             <NavBar />
           </AppBar>
           <Switch>
-            <Route exact path="/" component={() => <ExerciseFinder lowerWorkouts={lowerWorkouts} upperWorkouts={upperWorkouts} />} />
+            <Route
+              exact
+              path="/"
+              component={() => (
+                <ExerciseFinder
+                  lowerWorkouts={lowerWorkouts}
+                  upperWorkouts={upperWorkouts}
+                />
+              )}
+            />
             <Route exact path="/record" component={RecordWO} />
-            <Route exact path="/results" component={() => <Results results={results} selectedExercises={selectedExercises} totalExercises={totalExercises} setTotal={setTotal} />} />
+            <Route
+              exact
+              path="/results"
+              component={() => (
+                <Results
+                  results={results}
+                  selectedExercises={selectedExercises}
+                  totalExercises={totalExercises}
+                  setTotal={setTotal}
+                  setSelectedExercises={setSelectedExercises}
+                />
+              )}
+            />
           </Switch>
         </Router>
       </ThemeProvider>

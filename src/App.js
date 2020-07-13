@@ -55,71 +55,107 @@ const App = () => {
 
   const [results, setResults] = useState(null);
 
+  const [selectedExercises, setSelectedExercises] = useState([]);
+  const [totalExercises, setTotal] = useState(0);
+
   const [upperWorkouts, setUpperWorkouts] = useState([
     {
       name: "Neck",
       body: "upper",
-      exercises: [{ name: "Neck Ex 1" }, { name: "Neck Ex 2" }],
+      exercises: [
+        { name: "Neck Ex 1", image: Neck },
+        { name: "Neck Ex 2", image: Neck },
+      ],
       image: Neck,
     },
     {
       name: "Traps (trapezius)",
       body: "upper",
-      exercises: [{ name: "Traps Ex 1" }, { name: "Traps Ex 2" }],
+      exercises: [
+        { name: "Traps Ex 1", image: Traps },
+        { name: "Traps Ex 2", image: Traps },
+      ],
       image: Traps,
     },
     {
       name: "Shoulders (deltoids)",
       body: "upper",
-      exercises: [{ name: "Shoulders Ex 1" }, { name: "Shoulders Ex 2" }],
+      exercises: [
+        { name: "Shoulders Ex 1", image: Shoulders },
+        { name: "Shoulders Ex 2", image: Shoulders },
+      ],
       image: Shoulders,
     },
     {
       name: "Chest (pectoralis",
       body: "upper",
-      exercises: [{ name: "Chest Ex 1" }, { name: "Chest Ex 2" }],
+      exercises: [
+        { name: "Chest Ex 1", image: Chest },
+        { name: "Chest Ex 2", image: Chest },
+      ],
       image: Chest,
     },
     {
       name: "Abs (abdominis)",
       body: "upper",
-      exercises: [{ name: "Abs Ex 1" }, { name: "Abs Ex 2" }],
+      exercises: [
+        { name: "Abs Ex 1", image: Abs },
+        { name: "Abs Ex 2", image: Abs },
+      ],
       image: Abs,
     },
     {
       name: "Lats (latissimus dorsi)",
       body: "upper",
-      exercises: [{ name: "Lats Ex 1" }, { name: "Lats Ex 2" }],
+      exercises: [
+        { name: "Lats Ex 1", image: Lats },
+        { name: "Lats Ex 2", image: Lats },
+      ],
       image: Lats,
     },
     {
       name: "Middle Back",
       body: "upper",
-      exercises: [{ name: "Middle Back Ex 1" }, { name: "Middle Back Ex 2" }],
+      exercises: [
+        { name: "Middle Back Ex 1", image: Back },
+        { name: "Middle Back Ex 2", image: Back },
+      ],
       image: Back,
     },
     {
       name: "Lower Back",
       body: "upper",
-      exercises: [{ name: "Lower Back Ex 1" }, { name: "Lower Back Ex 2" }],
+      exercises: [
+        { name: "Lower Back Ex 1", image: Back },
+        { name: "Lower Back Ex 2", image: Back },
+      ],
       image: Back,
     },
     {
       name: "Biceps",
       body: "upper",
-      exercises: [{ name: "Biceps Ex 1" }, { name: "Biceps Ex 2" }],
+      exercises: [
+        { name: "Biceps Ex 1", image: Biceps },
+        { name: "Biceps Ex 2", image: Biceps },
+      ],
       image: Biceps,
     },
     {
       name: "Triceps",
       body: "upper",
-      exercises: [{ name: "Triceps Ex 1" }, { name: "Triceps Ex 2" }],
+      exercises: [
+        { name: "Triceps Ex 1", image: Triceps },
+        { name: "Triceps Ex 2", image: Triceps },
+      ],
       image: Triceps,
     },
     {
       name: "Forearms",
       body: "upper",
-      exercises: [{ name: "Forearms Ex 1" }, { name: "Forearms Ex 2" }],
+      exercises: [
+        { name: "Forearms Ex 1", image: Forearms },
+        { name: "Forearms Ex 2", image: Forearms },
+      ],
       image: Forearms,
     },
   ]);
@@ -146,7 +182,10 @@ const App = () => {
     {
       name: "Calves",
       body: "lower",
-      exercises: [{ name: "Calves Ex 1" }, { name: "Calves Ex 2" }],
+      exercises: [
+        { name: "Calves Ex 1", image: Calves },
+        { name: "Calves Ex 2", image: Calves },
+      ],
       image: Calves,
     },
   ]);
@@ -191,7 +230,15 @@ const App = () => {
             <Route
               exact
               path="/results"
-              component={() => <Results results={results} />}
+              component={() => (
+                <Results
+                  results={results}
+                  selectedExercises={selectedExercises}
+                  totalExercises={totalExercises}
+                  setTotal={setTotal}
+                  setSelectedExercises={setSelectedExercises}
+                />
+              )}
             />
           </Switch>
         </Router>

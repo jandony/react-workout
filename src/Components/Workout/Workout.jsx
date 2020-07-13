@@ -35,25 +35,57 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Workout = ({ name, body, image }) => {
+export const Workout = ({
+  name,
+  body,
+  image,
+  selectedExercises,
+  setTotal,
+  setSelectedExercises,
+}) => {
   const classes = useStyles();
 
+  const test = () => {
+    // console.log(name);
+    const newArray = selectedExercises;
+    newArray.push(name);
+    setSelectedExercises(newArray);
+    setTotal((count) => count + 1);
+    console.log(selectedExercises);
+  };
+
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} id={name}>
       <Card className={classes.workoutCard}>
-        <CardActionArea>
+        <CardActionArea onClick={test}>
           <Grid container direction="row">
             <Grid item sm={3}>
-              <CardMedia className={classes.media} image={image} title="Contemplative Reptile" />
+              <CardMedia
+                className={classes.media}
+                image={image}
+                title="Contemplative Reptile"
+              />
             </Grid>
 
             <Grid item sm={9}>
-              <Grid container alignItems="center" className={classes.cardContentContainer}>
+              <Grid
+                container
+                alignItems="center"
+                className={classes.cardContentContainer}
+              >
                 <Grid item>
-                  <Typography variant="p" component="p" className={classes.muscleGroup}>
+                  <Typography
+                    variant="p"
+                    component="p"
+                    className={classes.muscleGroup}
+                  >
                     {name}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
                     {body}
                   </Typography>
                 </Grid>

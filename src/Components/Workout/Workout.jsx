@@ -35,13 +35,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Workout = ({ name, body, image }) => {
+export const Workout = ({ name, body, image, selectedExercises, setTotal }) => {
   const classes = useStyles();
 
+  const test = () => {
+    // console.log(name);
+    selectedExercises.push(name);
+    setTotal((count) => count + 1);
+    console.log(selectedExercises);
+  };
+
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} id={name}>
       <Card className={classes.workoutCard}>
-        <CardActionArea>
+        <CardActionArea onClick={test}>
           <Grid container direction="row">
             <Grid item sm={3}>
               <CardMedia className={classes.media} image={image} title="Contemplative Reptile" />

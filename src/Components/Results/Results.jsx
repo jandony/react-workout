@@ -26,10 +26,7 @@ export default function Results({
 }) {
   const classes = useStyles();
 
-  const displayExercises = (selectedExercises) => {
-    const listItems = selectedExercises.map((number) => <li>{number}</li>);
-    return listItems;
-  };
+  console.log(results);
 
   return (
     <Grid container style={{ marginTop: "1rem" }}>
@@ -38,7 +35,7 @@ export default function Results({
           variant="h2"
           style={{ padding: "0.5em", marginTop: "4rem" }}
         >
-          Results (selected: {totalExercises})
+          Muscle Group: Neck
         </Typography>
         {results &&
           results.map((workout, index) => {
@@ -59,16 +56,16 @@ export default function Results({
       </Grid>
       <Grid item sm={5}>
         <Typography
-          variant="h2"
+          variant="subtitle1"
           style={{ padding: "0.5em", marginTop: "4rem" }}
         >
-          Your Exercises:
+          Your Workout (total: {totalExercises}):
         </Typography>
         <Grid container direction="column">
-          <Grid item style={{ marginLeft: "12rem" }}>
+          <Grid item style={{ marginLeft: "3rem" }}>
             {selectedExercises &&
               selectedExercises.map((item) => {
-                return <li>{item}</li>;
+                return <li>{item[0]}</li>;
               })}
           </Grid>
         </Grid>

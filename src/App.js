@@ -11,6 +11,7 @@ import NavBar from "./Components/NavBar/NavBar";
 // view components
 import ExerciseFinder from "./Views/ExerciseFinder.jsx";
 import RecordWO from "./Views/RecordWO.jsx";
+import YourWorkouts from "./Views/YourWorkouts.jsx";
 
 import SideBar from "./Components/SideBar/SideBar.jsx";
 import Results from "./Components/Results/Results.jsx";
@@ -74,6 +75,13 @@ const App = () => {
               )}
             />
             <Route exact path="/record" component={RecordWO} />
+            <Route
+              exact
+              path="/workouts"
+              component={() => (
+                <YourWorkouts selectedExercises={selectedExercises} />
+              )}
+            />
             <Route
               exact
               path="/results"

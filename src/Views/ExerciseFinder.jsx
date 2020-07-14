@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 // main component
-import { Workout } from "../Components/Workout/Workout";
+import { MuscleGroupCard } from "../Components/MuscleGroupCard/MuscleGroupCard";
 
 // custom components
 
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExerciseFinder({ workouts }) {
+export default function ExerciseFinder({ workouts, findResults }) {
   const classes = useStyles();
 
   return (
@@ -54,11 +54,10 @@ export default function ExerciseFinder({ workouts }) {
             {workouts.map((workout, index) => {
               if (workout.body === "Upper") {
                 return (
-                  <Workout
+                  <MuscleGroupCard
                     key={index}
-                    name={workout.name}
-                    body={workout.body}
-                    image={workout.image}
+                    workout={workout}
+                    findResults={findResults}
                   />
                 );
               }
@@ -75,11 +74,10 @@ export default function ExerciseFinder({ workouts }) {
             {workouts.map((workout, index) => {
               if (workout.body === "Lower") {
                 return (
-                  <Workout
+                  <MuscleGroupCard
                     key={index}
-                    name={workout.name}
-                    body={workout.body}
-                    image={workout.image}
+                    workout={workout}
+                    findResults={findResults}
                   />
                 );
               }

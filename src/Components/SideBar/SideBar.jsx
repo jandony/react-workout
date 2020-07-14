@@ -55,7 +55,7 @@ export default function SideBar({ findResults, workouts }) {
           <h2 className="SideBar--Heading">Upper</h2>
           <List>
             {workouts.map((workout, index) => {
-              if (workout.body === "Lower") {
+              if (workout.body === "Upper") {
                 return (
                   <ListItem
                     button

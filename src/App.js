@@ -69,7 +69,9 @@ const App = () => {
             <Route
               exact
               path="/"
-              component={() => <ExerciseFinder workouts={workouts} />}
+              component={() => (
+                <ExerciseFinder workouts={workouts} findResults={findResults} />
+              )}
             />
             <Route exact path="/record" component={RecordWO} />
             <Route

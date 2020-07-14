@@ -38,7 +38,7 @@ export default function Results({
           variant="h2"
           style={{ padding: "0.5em", marginTop: "4rem" }}
         >
-          {results ? results.body : "No Results"}
+          {results ? results.name : "No Results"}
         </Typography>
       </Grid>
       <Grid item sm={5}>

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExerciseFinder({ upperWorkouts, lowerWorkouts }) {
+export default function ExerciseFinder({ workouts }) {
   const classes = useStyles();
 
   return (
@@ -51,15 +51,17 @@ export default function ExerciseFinder({ upperWorkouts, lowerWorkouts }) {
             <hr />
           </Typography>
           <Grid container direction="row">
-            {upperWorkouts.map((workout, index) => {
-              return (
-                <Workout
-                  key={index}
-                  name={workout.name}
-                  body={workout.body}
-                  image={workout.image}
-                />
-              );
+            {workouts.map((workout, index) => {
+              if (workout.body === "Upper") {
+                return (
+                  <Workout
+                    key={index}
+                    name={workout.name}
+                    body={workout.body}
+                    image={workout.image}
+                  />
+                );
+              }
             })}
           </Grid>
         </Grid>
@@ -70,15 +72,17 @@ export default function ExerciseFinder({ upperWorkouts, lowerWorkouts }) {
             <hr />
           </Typography>
           <Grid container direction="row">
-            {lowerWorkouts.map((workout, index) => {
-              return (
-                <Workout
-                  key={index}
-                  name={workout.name}
-                  body={workout.body}
-                  image={workout.image}
-                />
-              );
+            {workouts.map((workout, index) => {
+              if (workout.body === "Lower") {
+                return (
+                  <Workout
+                    key={index}
+                    name={workout.name}
+                    body={workout.body}
+                    image={workout.image}
+                  />
+                );
+              }
             })}
           </Grid>
         </Grid>

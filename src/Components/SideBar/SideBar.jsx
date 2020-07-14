@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SideBar({ findResults, lowerWorkouts, upperWorkouts }) {
+export default function SideBar({ findResults, workouts }) {
   const classes = useStyles();
 
   return (
@@ -54,22 +54,38 @@ export default function SideBar({ findResults, lowerWorkouts, upperWorkouts }) {
         <div className={classes.drawerContainer}>
           <h2 className="SideBar--Heading">Upper</h2>
           <List>
-            {upperWorkouts.map((workout, index) => (
-              <ListItem button key={index} onClick={() => findResults(workout)}>
-                <ListItemIcon>{<FitnessCenter />}</ListItemIcon>
-                <ListItemText primary={workout.name} />
-              </ListItem>
-            ))}
+            {workouts.map((workout, index) => {
+              if (workout.body === "Lower") {
+                return (
+                  <ListItem
+                    button
+                    key={index}
+                    onClick={() => findResults(workout)}
+                  >
+                    <ListItemIcon>{<FitnessCenter />}</ListItemIcon>
+                    <ListItemText primary={workout.name} />
+                  </ListItem>
+                );
+              }
+            })}
           </List>
           <Divider />
           <h2 className="SideBar--Heading">Lower</h2>
           <List>
-            {lowerWorkouts.map((workout, index) => (
-              <ListItem button key={index} onClick={() => findResults(workout)}>
-                <ListItemIcon>{<FitnessCenter />}</ListItemIcon>
-                <ListItemText primary={workout.name} />
-              </ListItem>
-            ))}
+            {workouts.map((workout, index) => {
+              if (workout.body === "Lower") {
+                return (
+                  <ListItem
+                    button
+                    key={index}
+                    onClick={() => findResults(workout)}
+                  >
+                    <ListItemIcon>{<FitnessCenter />}</ListItemIcon>
+                    <ListItemText primary={workout.name} />
+                  </ListItem>
+                );
+              }
+            })}
           </List>
         </div>
       </Drawer>

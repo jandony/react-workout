@@ -60,6 +60,8 @@ export default function SideBar({ findResults, workouts }) {
                   <ListItem
                     button
                     key={index}
+                    component={Link}
+                    to={"/results"}
                     onClick={() => findResults(workout)}
                   >
                     <ListItemIcon>{<FitnessCenter />}</ListItemIcon>
@@ -78,6 +80,8 @@ export default function SideBar({ findResults, workouts }) {
                   <ListItem
                     button
                     key={index}
+                    component={Link}
+                    to={"/results"}
                     onClick={() => findResults(workout)}
                   >
                     <ListItemIcon>{<FitnessCenter />}</ListItemIcon>

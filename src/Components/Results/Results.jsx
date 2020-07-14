@@ -33,15 +33,20 @@ export default function Results({
 
   return (
     <Grid container style={{ marginTop: "1rem" }}>
-      <Grid item sm={5}>
+      <Grid item sm={11}>
         <Typography
           variant="h2"
           style={{ padding: "0.5em", marginTop: "4rem" }}
         >
+          {results ? results.body : "No Results"}
+        </Typography>
+      </Grid>
+      <Grid item sm={5}>
+        <Typography variant="h2" style={{ padding: "0.5em" }}>
           Results (selected: {totalExercises})
         </Typography>
         {results &&
-          results.map((workout, index) => {
+          results.exercises.map((workout, index) => {
             return (
               <Workout
                 key={index}
@@ -58,10 +63,7 @@ export default function Results({
         <Grid container direction="row"></Grid>
       </Grid>
       <Grid item sm={5}>
-        <Typography
-          variant="h2"
-          style={{ padding: "0.5em", marginTop: "4rem" }}
-        >
+        <Typography variant="h2" style={{ padding: "0.5em" }}>
           Your Exercises:
         </Typography>
         <Grid container direction="column">

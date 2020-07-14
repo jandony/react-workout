@@ -32,7 +32,7 @@ export default function Results({
   };
 
   return (
-    <Grid container style={{ marginTop: "1rem" }}>
+    <Grid container style={{ marginTop: "1rem", alignContent: "flex-start" }}>
       <Grid item sm={11}>
         <Typography
           variant="h2"
@@ -42,7 +42,10 @@ export default function Results({
         </Typography>
       </Grid>
       <Grid item sm={5}>
-        <Typography variant="h2" style={{ padding: "0.5em" }}>
+        <Typography
+          variant="h2"
+          style={{ padding: "0.5em", marginTop: "2rem" }}
+        >
           Results (selected: {totalExercises})
         </Typography>
         {results &&
@@ -63,7 +66,10 @@ export default function Results({
         <Grid container direction="row"></Grid>
       </Grid>
       <Grid item sm={5}>
-        <Typography variant="h2" style={{ padding: "0.5em" }}>
+        <Typography
+          variant="h2"
+          style={{ padding: "0.5em", marginTop: "2rem" }}
+        >
           Your Exercises:
         </Typography>
         <Grid container direction="column">

@@ -174,7 +174,7 @@ const calves = new MuscleGroup(
   Calves
 );
 
-export const upperExercises = [
+export const exercises = [
   neck,
   traps,
   shoulders,
@@ -186,14 +186,6 @@ export const upperExercises = [
   biceps,
   triceps,
   forearms,
-];
-
-export const lowerExercises = [
-  neck,
-  traps,
-  shoulders,
-  chest,
-  abs,
   glutes,
   quads,
   hamstrings,

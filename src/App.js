@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import AppBar from "@material-ui/core/AppBar";
 
-import { upperExercises, lowerExercises } from "./Data";
+import { exercises } from "./Data";
 
 import NavBar from "./Components/NavBar/NavBar";
 
@@ -42,8 +42,7 @@ const App = () => {
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [totalExercises, setTotal] = useState(0);
 
-  const [upperWorkouts, setUpperWorkouts] = useState(upperExercises);
-  const [lowerWorkouts, setLowerWorkouts] = useState(lowerExercises);
+  const [workouts, setWorkouts] = useState(exercises);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -59,11 +58,7 @@ const App = () => {
       className="App"
       style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}
     >
-      <SideBar
-        findResults={findResults}
-        upperWorkouts={upperWorkouts}
-        lowerWorkouts={lowerWorkouts}
-      />
+      <SideBar findResults={findResults} workouts={workouts} />
 
       <ThemeProvider theme={theme}>
         <Router history={history}>
@@ -74,12 +69,7 @@ const App = () => {
             <Route
               exact
               path="/"
-              component={() => (
-                <ExerciseFinder
-                  lowerWorkouts={lowerWorkouts}
-                  upperWorkouts={upperWorkouts}
-                />
-              )}
+              component={() => <ExerciseFinder workouts={workouts} />}
             />
             <Route exact path="/record" component={RecordWO} />
             <Route

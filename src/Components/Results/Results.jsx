@@ -35,10 +35,10 @@ export default function Results({
           variant="h2"
           style={{ padding: "0.5em", marginTop: "4rem" }}
         >
-          Muscle Group: Neck
+          {results ? results.name : "No Results"}
         </Typography>
         {results &&
-          results.map((workout, index) => {
+          results.exercises.map((workout, index) => {
             return (
               <Workout
                 key={index}

@@ -26,10 +26,7 @@ export default function Results({
 }) {
   const classes = useStyles();
 
-  const displayExercises = (selectedExercises) => {
-    const listItems = selectedExercises.map((number) => <li>{number}</li>);
-    return listItems;
-  };
+  console.log(results);
 
   return (
     <Grid container style={{ marginTop: "1rem", alignContent: "flex-start" }}>
@@ -69,14 +66,15 @@ export default function Results({
         <Typography
           variant="h2"
           style={{ padding: "0.5em", marginTop: "2rem" }}
+
         >
-          Your Exercises:
+          Your Workout (total: {totalExercises}):
         </Typography>
         <Grid container direction="column">
-          <Grid item style={{ marginLeft: "12rem" }}>
+          <Grid item style={{ marginLeft: "3rem" }}>
             {selectedExercises &&
               selectedExercises.map((item) => {
-                return <li>{item}</li>;
+                return <li>{item[0]}</li>;
               })}
           </Grid>
         </Grid>

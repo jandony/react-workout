@@ -78,8 +78,8 @@ const lats = new MuscleGroup(
   "Lats (latissimus dorsi)",
   "Upper",
   [
-    { name: "Lats Ex 1", image: Abs },
-    { name: "Lats Ex 2", image: Abs },
+    { name: "Lats Ex 1", image: Lats },
+    { name: "Lats Ex 2", image: Lats },
   ],
   Lats
 );

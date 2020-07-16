@@ -29,16 +29,24 @@ export default function Results({
   console.log(results);
 
   return (
-    <Grid container style={{ marginTop: "1rem" }}>
-      <Grid item sm={5}>
+    <Grid container style={{ marginTop: "1rem", alignContent: "flex-start" }}>
+      <Grid item sm={11}>
         <Typography
           variant="h2"
           style={{ padding: "0.5em", marginTop: "4rem" }}
         >
-          Muscle Group: Neck
+          {results ? results.name : "No Results"}
+        </Typography>
+      </Grid>
+      <Grid item sm={5}>
+        <Typography
+          variant="h2"
+          style={{ padding: "0.5em", marginTop: "2rem" }}
+        >
+          Results (selected: {totalExercises})
         </Typography>
         {results &&
-          results.map((workout, index) => {
+          results.exercises.map((workout, index) => {
             return (
               <Workout
                 key={index}
@@ -56,8 +64,9 @@ export default function Results({
       </Grid>
       <Grid item sm={5}>
         <Typography
-          variant="subtitle1"
-          style={{ padding: "0.5em", marginTop: "4rem" }}
+          variant="h2"
+          style={{ padding: "0.5em", marginTop: "2rem" }}
+
         >
           Your Workout (total: {totalExercises}):
         </Typography>

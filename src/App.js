@@ -50,8 +50,7 @@ const App = () => {
   };
 
   const findResults = (workout) => {
-    history.push("/results");
-    setResults(workout.exercises);
+    setResults(workout);
   };
 
   return (
@@ -59,10 +58,10 @@ const App = () => {
       className="App"
       style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}
     >
-      <SideBar findResults={findResults} workouts={workouts} />
+      <Router history={history}>
+        <SideBar findResults={findResults} workouts={workouts} />
 
-      <ThemeProvider theme={theme}>
-        <Router history={history}>
+        <ThemeProvider theme={theme}>
           <AppBar className={classes.appBar}>
             <NavBar />
           </AppBar>
@@ -96,8 +95,8 @@ const App = () => {
               )}
             />
           </Switch>
-        </Router>
-      </ThemeProvider>
+        </ThemeProvider>
+      </Router>
     </div>
   );
 };

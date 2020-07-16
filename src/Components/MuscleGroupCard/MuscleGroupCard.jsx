@@ -9,8 +9,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 const useStyles = makeStyles((theme) => ({
   workoutCard: {
-    margin: "1em",
-    marginBottom: "0em",
+    margin: 0,
     [theme.breakpoints.down("sm")]: {
       marginLeft: 0,
       marginRight: 0,

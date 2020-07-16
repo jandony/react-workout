@@ -42,6 +42,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "lightgrey",
     zIndex: 1000,
   },
+  muscleGroup: {
+    padding: 0,
+    margin: "1em",
+    marginBottom: "0em",
+  },
 }));
 
 export default function ExerciseFinder({ workouts, findResults }) {
@@ -56,27 +61,26 @@ export default function ExerciseFinder({ workouts, findResults }) {
             <hr />
           </Typography>
           <Grid container direction="row">
-            <List>
-              {workouts.map((workout, index) => {
-                if (workout.body === "Upper") {
-                  return (
-                    <ListItem
-                      button
+            {workouts.map((workout, index) => {
+              if (workout.body === "Upper") {
+                return (
+                  <ListItem
+                    button
+                    key={index}
+                    component={Link}
+                    to={"/results"}
+                    className={classes.muscleGroup}
+                    onClick={() => findResults(workout)}
+                  >
+                    <MuscleGroupCard
                       key={index}
-                      component={Link}
-                      to={"/results"}
-                      onClick={() => findResults(workout)}
-                    >
-                      <MuscleGroupCard
-                        key={index}
-                        workout={workout}
-                        findResults={findResults}
-                      />
-                    </ListItem>
-                  );
-                }
-              })}
-            </List>
+                      workout={workout}
+                      findResults={findResults}
+                    />
+                  </ListItem>
+                );
+              }
+            })}
           </Grid>
         </Grid>
 
@@ -89,11 +93,20 @@ export default function ExerciseFinder({ workouts, findResults }) {
             {workouts.map((workout, index) => {
               if (workout.body === "Lower") {
                 return (
-                  <MuscleGroupCard
+                  <ListItem
+                    button
                     key={index}
-                    workout={workout}
-                    findResults={findResults}
-                  />
+                    component={Link}
+                    to={"/results"}
+                    className={classes.muscleGroup}
+                    onClick={() => findResults(workout)}
+                  >
+                    <MuscleGroupCard
+                      key={index}
+                      workout={workout}
+                      findResults={findResults}
+                    />
+                  </ListItem>
                 );
               }
             })}

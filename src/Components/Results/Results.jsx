@@ -26,8 +26,6 @@ export default function Results({
 }) {
   const classes = useStyles();
 
-  console.log(results);
-
   return (
     <Grid container style={{ marginTop: "1rem", alignContent: "flex-start" }}>
       <Grid item sm={11}>
@@ -66,7 +64,6 @@ export default function Results({
         <Typography
           variant="h2"
           style={{ padding: "0.5em", marginTop: "2rem" }}
-
         >
           Your Workout (total: {totalExercises}):
         </Typography>
@@ -74,7 +71,7 @@ export default function Results({
           <Grid item style={{ marginLeft: "3rem" }}>
             {selectedExercises &&
               selectedExercises.map((item) => {
-                return <li>{item[0]}</li>;
+                return <li>{item.name}</li>;
               })}
           </Grid>
         </Grid>

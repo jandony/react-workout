@@ -41,6 +41,7 @@ const App = () => {
   const [results, setResults] = useState(null);
 
   const [selectedExercises, setSelectedExercises] = useState([]);
+
   const [totalExercises, setTotal] = useState(0);
 
   const [workouts, setWorkouts] = useState(exercises);
@@ -53,6 +54,20 @@ const App = () => {
     setResults(workout);
   };
 
+  const [removeExercises, setEx] = useState(null);
+  const removeEx = (workout) => {
+    setEx(workout);
+    setTotal((count) => count - 1);
+
+    const exerciseIndex = selectedExercises.findIndex(
+      (i) => i.name === workout.name
+    );
+    selectedExercises.splice(exerciseIndex, 1);
+
+    console.log("Exercise: " + workout.name);
+    console.log("Index: " + exerciseIndex);
+  };
+
   return (
     <div
       className="App"
@@ -63,7 +78,7 @@ const App = () => {
 
         <ThemeProvider theme={theme}>
           <AppBar className={classes.appBar}>
-            <NavBar />
+            <NavBar totalExercises={totalExercises} />
           </AppBar>
           <Switch>
             <Route
@@ -78,7 +93,10 @@ const App = () => {
               exact
               path="/workouts"
               component={() => (
-                <YourWorkouts selectedExercises={selectedExercises} />
+                <YourWorkouts
+                  selectedExercises={selectedExercises}
+                  removeEx={removeEx}
+                />
               )}
             />
             <Route

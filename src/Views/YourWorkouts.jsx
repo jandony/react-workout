@@ -7,6 +7,18 @@ import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import FolderIcon from "@material-ui/icons/Folder";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+
 const useStyles = makeStyles((theme) => ({
   workoutCard: {
     margin: "1em",
@@ -33,13 +45,20 @@ const useStyles = makeStyles((theme) => ({
   muscleGroup: {
     fontSize: "1.5em",
   },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+  },
 }));
 
-// main component
-// import { Workout } from "../Components/Workout/Workout.jsx";
-
-export default function YourWorkouts({ selectedExercises }) {
+export default function YourWorkouts({ removeEx, selectedExercises }) {
   const classes = useStyles();
+
+  const exerciseIndex = (workout) => {
+    const findExerciseIndex = selectedExercises.findIndex(
+      (i) => i.name === workout.name
+    );
+    console.log("index: " + findExerciseIndex);
+  };
 
   return (
     <Grid
@@ -56,50 +75,46 @@ export default function YourWorkouts({ selectedExercises }) {
     >
       <Grid item lg={5} style={{ marginTop: "6rem", width: "100%" }}>
         <Typography variant="h2">Your Workouts</Typography>
-        {selectedExercises == ""
-          ? "(Add Exercises to View Your Workout!)"
-          : selectedExercises.map((workout) => {
+        <List>
+          {selectedExercises == "" ? (
+            <p>Add Exercises to View Your Workout!</p>
+          ) : (
+            selectedExercises.map((workout) => {
               return (
-                <Grid item sm={12} id={workout[0]}>
-                  <Card className={classes.workoutCard}>
-                    <CardActionArea onClick={""}>
-                      <Grid container direction="row">
-                        <Grid item sm={3}>
-                          <CardMedia
-                            className={classes.media}
-                            image={workout[1]}
-                            title="Contemplative Reptile"
-                          />
-                        </Grid>
-
-                        <Grid item sm={9}>
-                          <Grid
-                            container
-                            alignItems="center"
-                            className={classes.cardContentContainer}
-                          >
-                            <Grid item>
-                              <Typography
-                                variant="p"
-                                component="p"
-                                className={classes.muscleGroup}
-                              >
-                                {workout[0]}
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                color="textSecondary"
-                                component="p"
-                              ></Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
+                <React.Fragment>
+                  <ListItem
+                    id={workout.name}
+                    className={classes.paper}
+                    divider
+                    button
+                    onClick={() => exerciseIndex(workout)}
+                  >
+                    <ListItemAvatar>
+                      {/* <Avatar> */}
+                      <img
+                        src={workout.image}
+                        alt={workout.name}
+                        height="35"
+                        width="35"
+                      />
+                      {/* </Avatar> */}
+                    </ListItemAvatar>
+                    <ListItemText primary={workout.name} />
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => removeEx(workout)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </React.Fragment>
               );
-            })}
+            })
+          )}
+        </List>
       </Grid>
     </Grid>
   );

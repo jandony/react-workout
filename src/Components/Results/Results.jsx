@@ -4,6 +4,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import FolderIcon from "@material-ui/icons/Folder";
+import IconButton from "@material-ui/core/IconButton";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+
 // main component
 import { Workout } from "../Workout/Workout.jsx";
 
@@ -13,6 +25,39 @@ const useStyles = makeStyles((theme) => ({
   orContainer: {
     [theme.breakpoints.down("sm")]: {
       display: "none",
+    },
+  },
+  exerciseContainer: {
+    marginTop: "1rem",
+    paddingTop: "6rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0,
+    },
+  },
+  bodyTitle: {
+    padding: "0.5em",
+    position: "sticky",
+    top: 72,
+    paddingTop: 25,
+    [theme.breakpoints.down("sm")]: {
+      top: 0,
+      paddingTop: 25,
+    },
+    fontSize: "2rem",
+    backgroundColor: "lightgrey",
+    zIndex: 1000,
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+  },
+  resultsContainer: {
+    marginTop: "1rem",
+    marginLeft: "12em",
+    marginRight: "12em",
+    [theme.breakpoints.down("md")]: {
+      marginLeft: 0,
+      marginRight: 0,
+      marginTop: "3rem",
     },
   },
 }));
@@ -26,24 +71,44 @@ export default function Results({
 }) {
   const classes = useStyles();
 
+  const selectCard = (name, image) => {
+    const newArray = selectedExercises;
+    newArray.push({ name: name, image: image });
+    setSelectedExercises(newArray);
+    setTotal((count) => count + 1);
+  };
+
   return (
-    <Grid container style={{ marginTop: "1rem", alignContent: "flex-start" }}>
-      <Grid item sm={11}>
+    <Grid
+      container
+      alignContent="flex-start"
+      justify="center"
+      className={classes.resultsContainer}
+    >
+      <Grid item xs={12} className={classes.exerciseContainer}>
         <Typography
           variant="h2"
-          style={{ padding: "0.5em", marginTop: "4rem" }}
+          component="h2"
+          className={classes.bodyTitle}
+          boxShadow={3}
         >
+          {results && (
+            <React.Fragment>
+              <img
+                src={results.image}
+                alt="body part"
+                height="100"
+                width="100"
+              />
+              <br />
+            </React.Fragment>
+          )}
           {results ? results.name : "No Results"}
+          <hr />
         </Typography>
       </Grid>
-      <Grid item sm={5}>
-        <Typography
-          variant="h2"
-          style={{ padding: "0.5em", marginTop: "2rem" }}
-        >
-          Results (selected: {totalExercises})
-        </Typography>
-        {results &&
+      <Grid item xs={12} lg={6}>
+        {/* {results &&
           results.exercises.map((workout, index) => {
             return (
               <Workout
@@ -57,24 +122,46 @@ export default function Results({
                 setSelectedExercises={setSelectedExercises}
               />
             );
-          })}
-        <Grid container direction="row"></Grid>
-      </Grid>
-      <Grid item sm={5}>
-        <Typography
-          variant="h2"
-          style={{ padding: "0.5em", marginTop: "2rem" }}
-        >
-          Your Workout (total: {totalExercises}):
-        </Typography>
-        <Grid container direction="column">
-          <Grid item style={{ marginLeft: "3rem" }}>
-            {selectedExercises &&
-              selectedExercises.map((item) => {
-                return <li>{item.name}</li>;
-              })}
-          </Grid>
-        </Grid>
+          })} */}
+
+        <List>
+          {results &&
+            results.exercises.map((workout, index) => {
+              return (
+                <React.Fragment>
+                  <ListItem
+                    id={workout.name}
+                    key={index}
+                    className={classes.paper}
+                    divider
+                    onClick={() => selectCard(workout.name, workout.image)}
+                    button
+                  >
+                    <ListItemAvatar>
+                      {/* <Avatar> */}
+                      <img
+                        src={workout.image}
+                        alt={workout.name}
+                        height="35"
+                        width="35"
+                      />
+                      {/* </Avatar> */}
+                    </ListItemAvatar>
+                    <ListItemText primary={workout.name} />
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        edge="end"
+                        aria-label="add"
+                        onClick={() => selectCard(workout.name, workout.image)}
+                      >
+                        <AddCircleIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </React.Fragment>
+              );
+            })}
+        </List>
       </Grid>
     </Grid>
   );

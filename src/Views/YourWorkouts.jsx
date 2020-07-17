@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
   },
+  title: {
+    fontSize: "1.5rem",
+  },
 }));
 
 export default function YourWorkouts({ removeEx, selectedExercises }) {
@@ -64,20 +67,23 @@ export default function YourWorkouts({ removeEx, selectedExercises }) {
     <Grid
       container
       direction="column"
-      alignItems="flex-start"
+      alignItems="center"
       justify="flex-start"
       style={{
         minHeight: "75vh",
-        paddingLeft: "6rem",
         paddingBottom: "3rem",
         width: "100%",
       }}
     >
       <Grid item lg={5} style={{ marginTop: "6rem", width: "100%" }}>
-        <Typography variant="h2">Your Workouts</Typography>
+        <Typography variant="h2" align="center" className={classes.title}>
+          Your Workouts
+        </Typography>
         <List>
           {selectedExercises == "" ? (
-            <p>Add Exercises to View Your Workout!</p>
+            <p style={{ textAlign: "center" }}>
+              Add Exercises to View Your Workout!
+            </p>
           ) : (
             selectedExercises.map((workout) => {
               return (

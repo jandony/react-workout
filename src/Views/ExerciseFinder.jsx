@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
   exerciseContainer: {
     marginTop: "1rem",
     paddingTop: "6rem",
-    paddingBottom: "10rem",
+    paddingBottom: "16rem",
     [theme.breakpoints.down("sm")]: {
-      paddingTop: 0,
+      paddingTop: "6rem",
     },
   },
   bodyTitle: {
@@ -35,10 +35,10 @@ const useStyles = makeStyles((theme) => ({
     top: 72,
     paddingTop: 25,
     [theme.breakpoints.down("sm")]: {
-      top: 0,
+      top: "2.75em",
       paddingTop: 25,
     },
-    fontSize: "1rem",
+    fontSize: "1.5rem",
     backgroundColor: "lightgrey",
     zIndex: 1000,
   },

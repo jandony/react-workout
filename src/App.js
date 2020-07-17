@@ -14,6 +14,7 @@ import RecordWO from "./Views/RecordWO.jsx";
 import YourWorkouts from "./Views/YourWorkouts.jsx";
 
 import SideBar from "./Components/SideBar/SideBar.jsx";
+import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
 import Results from "./Components/Results/Results.jsx";
 
 import history from "./History";
@@ -28,9 +29,6 @@ import "./App.css";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: "fixed",
-    [theme.breakpoints.down("sm")]: {
-      position: "inherit",
-    },
   },
 }));
 
@@ -68,17 +66,44 @@ const App = () => {
     console.log("Index: " + exerciseIndex);
   };
 
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setDrawer({ ...drawer, [anchor]: open });
+  };
+
+  const [drawer, setDrawer] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
   return (
     <div
       className="App"
       style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}
     >
       <Router history={history}>
-        <SideBar findResults={findResults} workouts={workouts} />
+        {/* <SideBar findResults={findResults} workouts={workouts} /> */}
+        <SideBarTemporary
+          findResults={findResults}
+          workouts={workouts}
+          drawer={drawer}
+          toggleDrawer={toggleDrawer}
+        />
 
         <ThemeProvider theme={theme}>
           <AppBar className={classes.appBar}>
-            <NavBar totalExercises={totalExercises} />
+            <NavBar
+              totalExercises={totalExercises}
+              toggleDrawer={toggleDrawer}
+            />
           </AppBar>
           <Switch>
             <Route

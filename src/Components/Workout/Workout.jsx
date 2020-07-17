@@ -56,7 +56,7 @@ export const Workout = ({
 
   return (
     <Grid item xs={12} id={name}>
-      <Card className={classes.workoutCard}>
+      <Card className={classes.workoutCard} disable>
         <CardActionArea onClick={selectCard}>
           <Grid container direction="row">
             <Grid item sm={3}>

@@ -11,6 +11,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import CreateIcon from "@material-ui/icons/Create";
 import FitnessCenter from "@material-ui/icons/FitnessCenter";
 
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -24,9 +27,23 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "0.5em",
     },
   },
+  drawerButton: {
+    marginLeft: "0.25em",
+    marginTop: "0.5em",
+    position: "absolute",
+    zIndex: 100,
+  },
+  paper: {
+    borderRadius: 0,
+  },
+  tabsContainer: {
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "3em",
+    },
+  },
 }));
 
-export default function CenteredTabs({ totalExercises }) {
+export default function CenteredTabs({ totalExercises, toggleDrawer }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -37,12 +54,21 @@ export default function CenteredTabs({ totalExercises }) {
   };
 
   return (
-    <Paper style={{ borderRadius: 0 }}>
+    <Paper className={classes.paper}>
+      <IconButton
+        edge="start"
+        aria-label="drawer"
+        className={classes.drawerButton}
+        onClick={toggleDrawer("left", true)}
+      >
+        <MenuIcon />
+      </IconButton>
       <Tabs
         value={value}
         onChange={handleChange}
         indicatorColor="primary"
         textColor="primary"
+        className={classes.tabsContainer}
         centered
       >
         <Tab

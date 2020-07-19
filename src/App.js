@@ -16,6 +16,7 @@ import YourWorkouts from "./Views/YourWorkouts.jsx";
 import SideBar from "./Components/SideBar/SideBar.jsx";
 import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
 import Results from "./Components/Results/Results.jsx";
+import MusclePage from "./Components/MusclePage/MusclePage.jsx";
 
 import history from "./History";
 
@@ -37,6 +38,8 @@ const App = () => {
   const [value, setValue] = useState(0);
 
   const [results, setResults] = useState(null);
+
+  const [exercisePage, setExercisePage] = useState();
 
   const [selectedExercises, setSelectedExercises] = useState([]);
 
@@ -84,6 +87,35 @@ const App = () => {
     right: false,
   });
 
+  const [openSnackbar, setSnackbar] = React.useState(false);
+  const [snackbarName, setSnackbarName] = React.useState("");
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbar(false);
+  };
+
+  const selectCard = (workout, name, image) => {
+    const newArray = selectedExercises;
+    newArray.push({
+      name: name,
+      image: image,
+      cat: results.slug,
+      slug: workout.slug,
+    });
+
+    setSnackbar(true);
+    setSnackbarName(name);
+    setSelectedExercises(newArray);
+    setTotal((count) => count + 1);
+  };
+
+  const [formDialog, setFormDialog] = React.useState(false);
+  const [workoutName, setWorkoutName] = React.useState("");
+
   return (
     <div
       className="App"
@@ -121,12 +153,17 @@ const App = () => {
                 <YourWorkouts
                   selectedExercises={selectedExercises}
                   removeEx={removeEx}
+                  setExercisePage={setExercisePage}
+                  setFormDialog={setFormDialog}
+                  formDialog={formDialog}
+                  workoutName={workoutName}
+                  setWorkoutName={setWorkoutName}
                 />
               )}
             />
             <Route
               exact
-              path="/results"
+              path="/:results"
               component={() => (
                 <Results
                   results={results}
@@ -134,6 +171,23 @@ const App = () => {
                   totalExercises={totalExercises}
                   setTotal={setTotal}
                   setSelectedExercises={setSelectedExercises}
+                  openSnackbar={openSnackbar}
+                  handleCloseSnackbar={handleCloseSnackbar}
+                  setSnackbar={setSnackbar}
+                  snackbarName={snackbarName}
+                  setSnackbarName={setSnackbarName}
+                  setExercisePage={setExercisePage}
+                  selectCard={selectCard}
+                />
+              )}
+            />
+            <Route
+              path="/:name"
+              component={() => (
+                <MusclePage
+                  exercisePage={exercisePage}
+                  results={results}
+                  selectCard={selectCard}
                 />
               )}
             />

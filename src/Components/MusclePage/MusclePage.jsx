@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     position: "sticky",
     top: 72,
     paddingTop: 25,
+    paddingBottom: 0,
     [theme.breakpoints.down("sm")]: {
       top: 0,
       paddingTop: 25,
@@ -66,13 +68,16 @@ const useStyles = makeStyles((theme) => ({
   snackbar: {
     marginBottomn: "3rem",
   },
+  addButton: {
+    textAlign: "right",
+  },
 }));
 
 function Alert(props) {
   return <MuiAlert elevation={3} variant="filled" {...props} />;
 }
 
-export default function Results({
+export default function MusclePage({
   results,
   selectedExercises,
   totalExercises,
@@ -83,15 +88,13 @@ export default function Results({
   setSnackbar,
   snackbarName,
   setSnackbarName,
-  setExercisePage,
+  exercisePage,
   selectCard,
 }) {
   const classes = useStyles();
 
-  const selectExercisePage = (workout) => {
-    console.log(workout);
-    setExercisePage([workout.name, workout.image, workout.slug]);
-  };
+  console.log(exercisePage);
+  console.log(results.slug);
 
   return (
     <Grid
@@ -118,72 +121,43 @@ export default function Results({
               <br />
             </React.Fragment>
           )}
-          {results ? results.name : "No Results"}
+          {exercisePage[0]} Page
           <hr />
+          <div className={classes.addButton}>
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<AddIcon />}
+              size="small"
+              onClick={() =>
+                selectCard(results, exercisePage[0], exercisePage[1])
+              }
+              button
+            >
+              Add Exercise
+            </Button>
+          </div>
         </Typography>
       </Grid>
       <Grid item xs={12} lg={6}>
-        <List>
-          {results &&
-            results.exercises.map((workout, index) => {
-              const catName = results.slug;
-              return (
-                <React.Fragment>
-                  <ListItem
-                    id={workout.name}
-                    key={index}
-                    className={classes.paper}
-                    divider
-                    onClick={() => selectExercisePage(workout)}
-                    button
-                    component={Link}
-                    to={`/${catName}/${workout.slug}`}
-                  >
-                    <ListItemAvatar>
-                      {/* <Avatar> */}
-                      <img
-                        src={workout.image}
-                        alt={workout.name}
-                        height="35"
-                        width="35"
-                      />
-                      {/* </Avatar> */}
-                    </ListItemAvatar>
-                    <ListItemText primary={workout.name} />
-                    <ListItemSecondaryAction>
-                      <IconButton
-                        edge="end"
-                        aria-label="add"
-                        onClick={() =>
-                          selectCard(workout, workout.name, workout.image)
-                        }
-                      >
-                        <AddCircleIcon />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-
-                  <Snackbar
-                    open={openSnackbar}
-                    autoHideDuration={2000}
-                    onClose={handleCloseSnackbar}
-                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                    button
-                    component={Link}
-                    to="/workouts"
-                  >
-                    <Alert
-                      className={classes.snackbar}
-                      onClose={handleCloseSnackbar}
-                      severity="success"
-                    >
-                      {snackbarName} Successfully Added!
-                    </Alert>
-                  </Snackbar>
-                </React.Fragment>
-              );
-            })}
-        </List>
+        <Typography variant="body1" align="center">
+          This will be information about the {exercisePage[0]} exercise.
+        </Typography>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={2000}
+          onClose={handleCloseSnackbar}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          button
+        >
+          <Alert
+            className={classes.snackbar}
+            onClose={handleCloseSnackbar}
+            severity="success"
+          >
+            {snackbarName} Successfully Added!
+          </Alert>
+        </Snackbar>
       </Grid>
     </Grid>
   );

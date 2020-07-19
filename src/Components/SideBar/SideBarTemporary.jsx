@@ -13,14 +13,18 @@ import FitnessCenter from "@material-ui/icons/FitnessCenter";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: drawerWidth,
   },
   fullList: {
-    width: "auto",
+    width: drawerWidth,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    paddingBottom: "6rem",
   },
 });
 
@@ -51,13 +55,14 @@ export default function SideBarTemporary({
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
-          <h2 className="SideBar--Heading">Upper</h2>
+          <h2 className="SideBar--Heading">Upper Body Muscles</h2>
           <List>
             {workouts.map((workout, index) => {
               if (workout.body === "Upper") {
                 return (
                   <ListItem
                     button
+                    divider
                     key={index}
                     component={Link}
                     to={"/results"}
@@ -77,14 +82,14 @@ export default function SideBarTemporary({
               }
             })}
           </List>
-          <Divider />
-          <h2 className="SideBar--Heading">Lower</h2>
+          <h2 className="SideBar--Heading">Lower Body Muscles</h2>
           <List>
             {workouts.map((workout, index) => {
               if (workout.body === "Lower") {
                 return (
                   <ListItem
                     button
+                    divider
                     key={index}
                     component={Link}
                     to={"/results"}

@@ -80,7 +80,7 @@ export default function Results({
   setSelectedExercises,
   openSnackbar,
   handleCloseSnackbar,
-  setSnackbar,
+  setOpenSnackbar,
   snackbarName,
   setSnackbarName,
   setExercisePage,

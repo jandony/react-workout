@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function YourWorkouts({
-  removeEx,
+  removeExercise,
   selectedExercises,
   setExercisePage,
   setFormDialog,
@@ -204,7 +204,7 @@ export default function YourWorkouts({
                       <IconButton
                         edge="end"
                         aria-label="delete"
-                        onClick={() => removeEx(workout)}
+                        onClick={() => removeExercise(workout)}
                       >
                         <DeleteIcon />
                       </IconButton>

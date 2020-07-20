@@ -55,9 +55,9 @@ const App = () => {
     setResults(workout);
   };
 
-  const [removeExercises, setEx] = useState(null);
-  const removeEx = (workout) => {
-    setEx(workout);
+  const [removeExercises, setRemoveExercises] = useState(null);
+  const removeExercise = (workout) => {
+    setRemoveExercises(workout);
     setTotal((count) => count - 1);
 
     const exerciseIndex = selectedExercises.findIndex(
@@ -76,7 +76,7 @@ const App = () => {
     ) {
       return;
     }
-
+    // setDrawer will set the Drawer state to the direction of the openning drawer. Ex: left will open drawer to the left.
     setDrawer({ ...drawer, [anchor]: open });
   };
 
@@ -87,7 +87,7 @@ const App = () => {
     right: false,
   });
 
-  const [openSnackbar, setSnackbar] = React.useState(false);
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [snackbarName, setSnackbarName] = React.useState("");
 
   const handleCloseSnackbar = (event, reason) => {
@@ -95,7 +95,7 @@ const App = () => {
       return;
     }
 
-    setSnackbar(false);
+    setOpenSnackbar(false);
   };
 
   const selectCard = (workout, name, image) => {
@@ -107,7 +107,7 @@ const App = () => {
       slug: workout.slug,
     });
 
-    setSnackbar(true);
+    setOpenSnackbar(true);
     setSnackbarName(name);
     setSelectedExercises(newArray);
     setTotal((count) => count + 1);
@@ -152,7 +152,7 @@ const App = () => {
               component={() => (
                 <YourWorkouts
                   selectedExercises={selectedExercises}
-                  removeEx={removeEx}
+                  removeExercise={removeExercise}
                   setExercisePage={setExercisePage}
                   setFormDialog={setFormDialog}
                   formDialog={formDialog}
@@ -173,7 +173,7 @@ const App = () => {
                   setSelectedExercises={setSelectedExercises}
                   openSnackbar={openSnackbar}
                   handleCloseSnackbar={handleCloseSnackbar}
-                  setSnackbar={setSnackbar}
+                  setOpenSnackbar={setOpenSnackbar}
                   snackbarName={snackbarName}
                   setSnackbarName={setSnackbarName}
                   setExercisePage={setExercisePage}

@@ -81,8 +81,6 @@ function Alert(props) {
 export default function MusclePage({
   results,
   selectedExercises,
-  totalExercises,
-  setTotal,
   setSelectedExercises,
   openSnackbar,
   handleCloseSnackbar,

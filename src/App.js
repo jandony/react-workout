@@ -51,26 +51,16 @@ const App = () => {
 
   const [selectedExercises, setSelectedExercises] = useState([]);
 
-  const [totalExercises, setTotal] = useState(0);
-
   const [workouts, setWorkouts] = useState(exercises);
 
   const findResults = (workout) => {
     setResults(workout);
   };
 
-  const [removeExercises, setRemoveExercises] = useState(null);
   const removeExercise = (workout) => {
-    setRemoveExercises(workout);
-    setTotal((count) => count - 1);
-
-    const exerciseIndex = selectedExercises.findIndex(
-      (i) => i.name === workout.name
-    );
-    selectedExercises.splice(exerciseIndex, 1);
-
-    console.log("Exercise: " + workout.name);
-    console.log("Index: " + exerciseIndex);
+    const temp = [...selectedExercises];
+    const newArray = temp.filter((i) => i.name !== workout.name);
+    setSelectedExercises(newArray);
   };
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -114,7 +104,6 @@ const App = () => {
     setOpenSnackbar(true);
     setSnackbarName(name);
     setSelectedExercises(newArray);
-    setTotal((count) => count + 1);
   };
 
   const [formDialog, setFormDialog] = React.useState(false);
@@ -137,10 +126,10 @@ const App = () => {
         <ThemeProvider theme={theme}>
           <AppBar className={classes.appBar}>
             <NavBar
-              totalExercises={totalExercises}
               toggleDrawer={toggleDrawer}
               value={value}
               handleChange={handleChange}
+              selectedExercises={selectedExercises}
             />
           </AppBar>
           <Switch>
@@ -158,7 +147,6 @@ const App = () => {
               component={() => (
                 <YourWorkouts
                   selectedExercises={selectedExercises}
-                  totalExercises={totalExercises}
                   removeExercise={removeExercise}
                   setExercisePage={setExercisePage}
                   setFormDialog={setFormDialog}
@@ -176,8 +164,6 @@ const App = () => {
                 <Results
                   results={results}
                   selectedExercises={selectedExercises}
-                  totalExercises={totalExercises}
-                  setTotal={setTotal}
                   setSelectedExercises={setSelectedExercises}
                   openSnackbar={openSnackbar}
                   handleCloseSnackbar={handleCloseSnackbar}

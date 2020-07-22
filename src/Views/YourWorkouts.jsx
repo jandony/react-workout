@@ -83,7 +83,6 @@ const useStyles = makeStyles((theme) => ({
 export default function YourWorkouts({
   removeExercise,
   selectedExercises,
-  totalExercises,
   setExercisePage,
   setFormDialog,
   formDialog,
@@ -242,7 +241,7 @@ export default function YourWorkouts({
             fullWidth
             onClick={openFormDialog}
           >
-            Save New Workout ({totalExercises})
+            Save New Workout ({selectedExercises.length})
           </Button>
           <Dialog
             open={formDialog}

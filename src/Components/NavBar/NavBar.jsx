@@ -44,14 +44,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CenteredTabs({
-  totalExercises,
   toggleDrawer,
   handleChange,
+  selectedExercises,
   value,
 }) {
   const classes = useStyles();
 
-  var total = totalExercises;
+  var total = selectedExercises.length;
 
   return (
     <Paper className={classes.paper}>

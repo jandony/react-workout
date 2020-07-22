@@ -1,27 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import FolderIcon from "@material-ui/icons/Folder";
-import IconButton from "@material-ui/core/IconButton";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-
-// main component
-import { Workout } from "../Workout/Workout.jsx";
 
 // custom components
 

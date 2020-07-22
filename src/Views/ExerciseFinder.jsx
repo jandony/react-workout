@@ -4,11 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 
-import { Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // main component
 import { MuscleGroupCard } from "../Components/MuscleGroupCard/MuscleGroupCard";

@@ -74,13 +74,8 @@ function Alert(props) {
 
 export default function Results({
   results,
-  selectedExercises,
-  totalExercises,
-  setTotal,
-  setSelectedExercises,
   openSnackbar,
   handleCloseSnackbar,
-  setOpenSnackbar,
   snackbarName,
   setSnackbarName,
   setExercisePage,

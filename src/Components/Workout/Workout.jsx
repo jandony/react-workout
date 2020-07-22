@@ -42,21 +42,21 @@ export const Workout = ({
   selectedExercises,
   setTotal,
   setSelectedExercises,
+  setNames,
+  selectedNames,
 }) => {
   const classes = useStyles();
 
   const selectCard = () => {
-    // console.log(image);
     const newArray = selectedExercises;
-    newArray.push([name, image]);
+    newArray.push({ name: name, image: image });
     setSelectedExercises(newArray);
     setTotal((count) => count + 1);
-    // console.log(selectedExercises);
   };
 
   return (
     <Grid item xs={12} id={name}>
-      <Card className={classes.workoutCard}>
+      <Card className={classes.workoutCard} disable>
         <CardActionArea onClick={selectCard}>
           <Grid container direction="row">
             <Grid item sm={3}>

@@ -4,11 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 
-import { Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // main component
 import { MuscleGroupCard } from "../Components/MuscleGroupCard/MuscleGroupCard";
@@ -24,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
   exerciseContainer: {
     marginTop: "1rem",
     paddingTop: "6rem",
-    paddingBottom: "10rem",
+    paddingBottom: "16rem",
     [theme.breakpoints.down("sm")]: {
-      paddingTop: 0,
+      paddingTop: "6rem",
     },
   },
   bodyTitle: {
@@ -35,10 +33,10 @@ const useStyles = makeStyles((theme) => ({
     top: 72,
     paddingTop: 25,
     [theme.breakpoints.down("sm")]: {
-      top: 0,
+      top: "2.75em",
       paddingTop: 25,
     },
-    fontSize: "1rem",
+    fontSize: "1.5rem",
     backgroundColor: "lightgrey",
     zIndex: 1000,
   },
@@ -68,7 +66,7 @@ export default function ExerciseFinder({ workouts, findResults }) {
                     button
                     key={index}
                     component={Link}
-                    to={"/results"}
+                    to={`${workout.slug}`}
                     className={classes.muscleGroup}
                     onClick={() => findResults(workout)}
                   >
@@ -97,7 +95,7 @@ export default function ExerciseFinder({ workouts, findResults }) {
                     button
                     key={index}
                     component={Link}
-                    to={"/results"}
+                    to={`${workout.slug}`}
                     className={classes.muscleGroup}
                     onClick={() => findResults(workout)}
                   >

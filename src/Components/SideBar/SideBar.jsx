@@ -9,7 +9,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import FitnessCenter from "@material-ui/icons/FitnessCenter";
-import { Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./SideBar.css";
 
 const drawerWidth = 240;

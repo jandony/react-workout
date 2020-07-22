@@ -43,15 +43,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CenteredTabs({ totalExercises, toggleDrawer }) {
+export default function CenteredTabs({
+  totalExercises,
+  toggleDrawer,
+  handleChange,
+  value,
+}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
 
   var total = totalExercises;
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <Paper className={classes.paper}>
@@ -76,16 +76,16 @@ export default function CenteredTabs({ totalExercises, toggleDrawer }) {
           icon={<SearchIcon />}
           className={classes.tabs}
           component={Link}
+          value={0}
           to="/"
-          onClick={handleChange}
         />
         <Tab
           label="Record Workout"
           icon={<CreateIcon />}
           className={classes.tabs}
           component={Link}
+          value={1}
           to="/record"
-          onClick={handleChange}
         />
         <Tab
           label="Your Workouts"
@@ -96,8 +96,8 @@ export default function CenteredTabs({ totalExercises, toggleDrawer }) {
           }
           className={classes.tabs}
           component={Link}
+          value={2}
           to="/workouts"
-          onClick={handleChange}
         />
       </Tabs>
     </Paper>

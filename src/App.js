@@ -13,7 +13,7 @@ import ExerciseFinder from "./Views/ExerciseFinder.jsx";
 import RecordWO from "./Views/RecordWO.jsx";
 import YourWorkouts from "./Views/YourWorkouts.jsx";
 
-import SideBar from "./Components/SideBar/SideBar.jsx";
+// import SideBar from "./Components/SideBar/SideBar.jsx";
 import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
 import Results from "./Components/Results/Results.jsx";
 import MusclePage from "./Components/MusclePage/MusclePage.jsx";
@@ -35,21 +35,25 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
   const classes = useStyles();
+
   const [value, setValue] = useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const [results, setResults] = useState(null);
 
-  const [exercisePage, setExercisePage] = useState();
+  const [exercisePage, setExercisePage] = useState({
+    name: "exercise",
+    image: "",
+    slug: "",
+  });
 
   const [selectedExercises, setSelectedExercises] = useState([]);
 
   const [totalExercises, setTotal] = useState(0);
 
   const [workouts, setWorkouts] = useState(exercises);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   const findResults = (workout) => {
     setResults(workout);
@@ -102,7 +106,7 @@ const App = () => {
     const newArray = selectedExercises;
     newArray.push({
       name: name,
-      image: image,
+      image: workout.image,
       cat: results.slug,
       slug: workout.slug,
     });
@@ -135,6 +139,8 @@ const App = () => {
             <NavBar
               totalExercises={totalExercises}
               toggleDrawer={toggleDrawer}
+              value={value}
+              handleChange={handleChange}
             />
           </AppBar>
           <Switch>
@@ -152,12 +158,14 @@ const App = () => {
               component={() => (
                 <YourWorkouts
                   selectedExercises={selectedExercises}
+                  totalExercises={totalExercises}
                   removeExercise={removeExercise}
                   setExercisePage={setExercisePage}
                   setFormDialog={setFormDialog}
                   formDialog={formDialog}
                   workoutName={workoutName}
                   setWorkoutName={setWorkoutName}
+                  setValue={setValue}
                 />
               )}
             />
@@ -188,6 +196,7 @@ const App = () => {
                   exercisePage={exercisePage}
                   results={results}
                   selectCard={selectCard}
+                  openSnackbar={openSnackbar}
                 />
               )}
             />

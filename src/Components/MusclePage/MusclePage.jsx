@@ -69,7 +69,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottomn: "3rem",
   },
   addButton: {
-    textAlign: "right",
+    textAlign: "center",
+    marginBottom: "1rem",
   },
 }));
 
@@ -93,8 +94,9 @@ export default function MusclePage({
 }) {
   const classes = useStyles();
 
-  console.log(exercisePage);
-  console.log(results.slug);
+  console.log(results);
+  //   console.log(exercisePage);
+  //   console.log(results.slug);
 
   return (
     <Grid
@@ -121,16 +123,16 @@ export default function MusclePage({
               <br />
             </React.Fragment>
           )}
-          {exercisePage[0]} Page
+          {exercisePage.name} Page
           <hr />
           <div className={classes.addButton}>
             <Button
               variant="contained"
               color="secondary"
               startIcon={<AddIcon />}
-              size="small"
+              size="large"
               onClick={() =>
-                selectCard(results, exercisePage[0], exercisePage[1])
+                selectCard(exercisePage, exercisePage.name, exercisePage.slug)
               }
               button
             >
@@ -141,7 +143,7 @@ export default function MusclePage({
       </Grid>
       <Grid item xs={12} lg={6}>
         <Typography variant="body1" align="center">
-          This will be information about the {exercisePage[0]} exercise.
+          This will be information about {exercisePage.name}.
         </Typography>
         <Snackbar
           open={openSnackbar}
@@ -155,7 +157,7 @@ export default function MusclePage({
             onClose={handleCloseSnackbar}
             severity="success"
           >
-            {snackbarName} Successfully Added!
+            {exercisePage.name} Successfully Added!
           </Alert>
         </Snackbar>
       </Grid>

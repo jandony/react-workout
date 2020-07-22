@@ -83,11 +83,13 @@ const useStyles = makeStyles((theme) => ({
 export default function YourWorkouts({
   removeExercise,
   selectedExercises,
+  totalExercises,
   setExercisePage,
   setFormDialog,
   formDialog,
   workoutName,
   setWorkoutName,
+  setValue,
 }) {
   const classes = useStyles();
 
@@ -96,7 +98,11 @@ export default function YourWorkouts({
       (i) => i.name === workout.name
     );
     console.log("index: " + findExerciseIndex);
-    setExercisePage(workout.name);
+    setExercisePage({
+      name: workout.name,
+      image: workout.image,
+      slug: workout.slug,
+    });
   };
 
   const openFormDialog = () => {
@@ -111,8 +117,10 @@ export default function YourWorkouts({
     event.preventDefault();
     closeFormDialog();
     setWorkoutName(event.target.value);
-    console.log("Submitted: " + workoutName);
+    // console.log("Submitted: " + workoutName);
   };
+
+  //   console.log(selectedExercises);
 
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -177,7 +185,7 @@ export default function YourWorkouts({
         <List>
           {selectedExercises &&
             selectedExercises.map((workout) => {
-              console.log(workout);
+              //   console.log(workout);
               return (
                 <React.Fragment>
                   <ListItem
@@ -222,6 +230,7 @@ export default function YourWorkouts({
             startIcon={<AddIcon />}
             size="large"
             to="/"
+            onClick={() => setValue(0)}
             component={Link}
           >
             Add Exercise
@@ -233,7 +242,7 @@ export default function YourWorkouts({
             fullWidth
             onClick={openFormDialog}
           >
-            Save New Workout
+            Save New Workout ({totalExercises})
           </Button>
           <Dialog
             open={formDialog}

@@ -7,12 +7,12 @@ import Typography from "@material-ui/core/Typography";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+// import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import FolderIcon from "@material-ui/icons/Folder";
+// import Avatar from "@material-ui/core/Avatar";
+// import FolderIcon from "@material-ui/icons/Folder";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
@@ -20,7 +20,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 // main component
-import { Workout } from "../Workout/Workout.jsx";
+// import { Workout } from "../Workout/Workout.jsx";
 
 // custom components
 
@@ -90,7 +90,11 @@ export default function Results({
 
   const selectExercisePage = (workout) => {
     console.log(workout);
-    setExercisePage([workout.name, workout.image, workout.slug]);
+    setExercisePage({
+      name: workout.name,
+      image: workout.image,
+      slug: workout.slug,
+    });
   };
 
   return (
@@ -118,7 +122,7 @@ export default function Results({
               <br />
             </React.Fragment>
           )}
-          {results ? results.name : "No Results"}
+          {results ? results.name : "No Results!!!"}
           <hr />
         </Typography>
       </Grid>

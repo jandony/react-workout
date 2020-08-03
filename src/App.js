@@ -65,7 +65,7 @@ const App = () => {
 
   const removeExercise = (workout) => {
     const temp = [...selectedExercises];
-    const newArray = temp.filter((i) => i.name !== workout.name);
+    const newArray = temp.filter((i) => i.uniqueID !== workout.uniqueID);
     setSelectedExercises(newArray);
   };
 
@@ -100,11 +100,15 @@ const App = () => {
 
   const selectCard = (workout, name, image) => {
     const newArray = selectedExercises;
+    const uniqueID =
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
     newArray.push({
       name: name,
       image: workout.image,
       cat: results.slug,
       slug: workout.slug,
+      uniqueID: uniqueID,
     });
 
     setOpenSnackbar(true);

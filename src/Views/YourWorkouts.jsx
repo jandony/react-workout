@@ -83,6 +83,8 @@ export default function YourWorkouts({
   workoutName,
   setWorkoutName,
   setValue,
+  savedWorkouts,
+  updateSavedWorkouts,
 }) {
   const classes = useStyles();
 
@@ -107,10 +109,12 @@ export default function YourWorkouts({
   };
 
   const newWorkout = (event) => {
+    const workoutName = document.querySelector("#workout-name").value;
     event.preventDefault();
+    const newWorkout = { name: workoutName, excercises: selectedExercises };
     closeFormDialog();
-    setWorkoutName(event.target.value);
-    console.log("Submitted: " + workoutName);
+    updateSavedWorkouts(newWorkout);
+    console.log(newWorkout);
   };
 
   //   console.log(selectedExercises);
@@ -143,30 +147,22 @@ export default function YourWorkouts({
           >
             Saved Workouts:
           </Typography>
-          <ListItem
-            className={classes.paper}
-            divider
-            button
-            component={Link}
-            to="/workout1"
-          >
-            <ListItemText>Workout 1</ListItemText>
-            <IconButton edge="end" aria-label="view">
-              <ChevronRightIcon />
-            </IconButton>
-          </ListItem>
-          <ListItem className={classes.paper} divider>
-            <ListItemText>Workout 2</ListItemText>
-            <IconButton edge="end" aria-label="view">
-              <ChevronRightIcon />
-            </IconButton>
-          </ListItem>
-          <ListItem className={classes.paper} divider>
-            <ListItemText>Workout 3</ListItemText>
-            <IconButton edge="end" aria-label="view">
-              <ChevronRightIcon />
-            </IconButton>
-          </ListItem>
+          {savedWorkouts.map((workout, index) => {
+            return (
+              <ListItem
+                className={classes.paper}
+                divider
+                button
+                component={Link}
+                to={`/workout${index + 1}`}
+              >
+                <ListItemText>{workout.name}</ListItemText>
+                <IconButton edge="end" aria-label="view">
+                  <ChevronRightIcon />
+                </IconButton>
+              </ListItem>
+            );
+          })}
         </List>
         <Typography
           variant="subtitle1"

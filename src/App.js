@@ -49,9 +49,15 @@ const App = () => {
     slug: "",
   });
 
+  const [savedWorkouts, setSavedWorkouts] = useState([]);
+
   const [selectedExercises, setSelectedExercises] = useState([]);
 
   const [workouts, setWorkouts] = useState(exercises);
+
+  const updateSavedWorkouts = (workout) => {
+    setSavedWorkouts([...savedWorkouts, workout]);
+  };
 
   const findResults = (workout) => {
     setResults(workout);
@@ -154,6 +160,8 @@ const App = () => {
                   workoutName={workoutName}
                   setWorkoutName={setWorkoutName}
                   setValue={setValue}
+                  savedWorkouts={savedWorkouts}
+                  updateSavedWorkouts={updateSavedWorkouts}
                 />
               )}
             />

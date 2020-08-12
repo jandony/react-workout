@@ -1,28 +1,30 @@
 import React from "react";
+
+// Utilities
 import { Link } from "react-router-dom";
-
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 
+// Material UI Components
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Slide from "@material-ui/core/Slide";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+// Material Icons
 import AddIcon from "@material-ui/icons/Add";
-import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import Button from "@material-ui/core/Button";
-
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Slide from "@material-ui/core/Slide";
 
 const useStyles = makeStyles((theme) => ({
   workoutCard: {
@@ -83,6 +85,8 @@ export default function YourWorkouts({
   workoutName,
   setWorkoutName,
   setValue,
+  savedWorkouts,
+  setSavedWorkouts,
 }) {
   const classes = useStyles();
 
@@ -106,14 +110,24 @@ export default function YourWorkouts({
     setFormDialog(false);
   };
 
+  const handleWorkoutName = (event) => {
+    const temp = [...savedWorkouts];
+    const newArray = temp.push({ name: event.target.value, exercises: [] });
+
+    setSavedWorkouts(newArray);
+  };
+
   const newWorkout = (event) => {
     event.preventDefault();
     closeFormDialog();
-    setWorkoutName(event.target.value);
-    console.log("Submitted: " + workoutName);
-  };
 
-  //   console.log(selectedExercises);
+    // const temp = [...savedWorkouts];
+    // const newArray = temp.push({ name: event.target.value, exercises: [] });
+
+    // setSavedWorkouts(newArray);
+
+    console.log("Submitted: " + event.target.value);
+  };
 
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -135,38 +149,25 @@ export default function YourWorkouts({
         <Typography variant="h2" align="center" className={classes.title}>
           Your Workouts
         </Typography>
-        <List>
-          <Typography
-            variant="subtitle1"
-            align="left"
-            className={classes.subtitle}
-          >
-            Saved Workouts:
-          </Typography>
-          <ListItem
-            className={classes.paper}
-            divider
-            button
-            component={Link}
-            to="/workout1"
-          >
-            <ListItemText>Workout 1</ListItemText>
-            <IconButton edge="end" aria-label="view">
-              <ChevronRightIcon />
-            </IconButton>
-          </ListItem>
-          <ListItem className={classes.paper} divider>
-            <ListItemText>Workout 2</ListItemText>
-            <IconButton edge="end" aria-label="view">
-              <ChevronRightIcon />
-            </IconButton>
-          </ListItem>
-          <ListItem className={classes.paper} divider>
-            <ListItemText>Workout 3</ListItemText>
-            <IconButton edge="end" aria-label="view">
-              <ChevronRightIcon />
-            </IconButton>
-          </ListItem>
+        <Typography
+          variant="subtitle1"
+          align="left"
+          className={classes.subtitle}
+        >
+          Saved Workouts:
+        </Typography>
+        <List id="saved-workouts">
+          {savedWorkouts &&
+            savedWorkouts.map((workout) => {
+              return (
+                <ListItem className={classes.paper} divider button>
+                  <ListItemText>{workout.name}</ListItemText>
+                  <IconButton edge="end" aria-label="view">
+                    <ChevronRightIcon />
+                  </IconButton>
+                </ListItem>
+              );
+            })}
         </List>
         <Typography
           variant="subtitle1"
@@ -178,7 +179,6 @@ export default function YourWorkouts({
         <List>
           {selectedExercises &&
             selectedExercises.map((workout) => {
-              //   console.log(workout);
               return (
                 <React.Fragment>
                   <ListItem
@@ -246,17 +246,15 @@ export default function YourWorkouts({
             fullWidth
           >
             <DialogTitle id="form-dialog-title">Save New Workout:</DialogTitle>
-            <form>
+            <form onSubmit={newWorkout}>
               <DialogContent>
-                {/* <DialogContentText>
-                Name your new workout those awesome exercises you did!
-              </DialogContentText> */}
                 <TextField
                   autoFocus
                   margin="dense"
                   id="workout-name"
                   label="Workout Name"
                   type="text"
+                  onChange={handleWorkoutName}
                   fullWidth
                 />
               </DialogContent>
@@ -264,9 +262,7 @@ export default function YourWorkouts({
                 <Button onClick={closeFormDialog} color="primary">
                   Cancel
                 </Button>
-                <Button onClick={newWorkout} color="primary">
-                  Save
-                </Button>
+                <Button color="primary">Save</Button>
               </DialogActions>
             </form>
           </Dialog>

@@ -1,7 +1,11 @@
 import React from "react";
+
+// Utilities
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+
+// Matieral UI Components
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -29,7 +33,7 @@ export default function SideBarTemporary({
   drawer,
   toggleDrawer,
   findResults,
-  workouts,
+  exercises,
 }) {
   const classes = useStyles();
 
@@ -54,7 +58,7 @@ export default function SideBarTemporary({
         <div className={classes.drawerContainer}>
           <h2 className="SideBar--Heading">Upper Body Muscles</h2>
           <List>
-            {workouts.map((workout, index) => {
+            {exercises.map((workout, index) => {
               if (workout.body === "Upper") {
                 return (
                   <ListItem
@@ -76,12 +80,14 @@ export default function SideBarTemporary({
                     <ListItemText primary={workout.name} />
                   </ListItem>
                 );
+              } else {
+                return null;
               }
             })}
           </List>
           <h2 className="SideBar--Heading">Lower Body Muscles</h2>
           <List>
-            {workouts.map((workout, index) => {
+            {exercises.map((workout, index) => {
               if (workout.body === "Lower") {
                 return (
                   <ListItem
@@ -103,6 +109,8 @@ export default function SideBarTemporary({
                     <ListItemText primary={workout.name} />
                   </ListItem>
                 );
+              } else {
+                return null;
               }
             })}
           </List>

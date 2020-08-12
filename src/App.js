@@ -1,28 +1,24 @@
 import React, { useState } from "react";
+
+// Data & Utilities
 import { Router, Route, Switch } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-
-import AppBar from "@material-ui/core/AppBar";
-
+import history from "./History";
 import { exercises } from "./Data";
 
-import NavBar from "./Components/NavBar/NavBar";
-
-// view components
+// View Components
 import ExerciseFinder from "./Views/ExerciseFinder.jsx";
 import RecordWO from "./Views/RecordWO.jsx";
 import YourWorkouts from "./Views/YourWorkouts.jsx";
-
-// import SideBar from "./Components/SideBar/SideBar.jsx";
-import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
 import Results from "./Components/Results/Results.jsx";
 import MusclePage from "./Components/MusclePage/MusclePage.jsx";
 
-import history from "./History";
+// Custom Components
+import AppBar from "@material-ui/core/AppBar";
+import NavBar from "./Components/NavBar/NavBar";
+import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
 
-// custom components
-
-// custom styles
+// Custom Styles
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 import "./App.css";
@@ -50,8 +46,6 @@ const App = () => {
   });
 
   const [selectedExercises, setSelectedExercises] = useState([]);
-
-  const [workouts, setWorkouts] = useState(exercises);
 
   const findResults = (workout) => {
     setResults(workout);
@@ -107,7 +101,21 @@ const App = () => {
   };
 
   const [formDialog, setFormDialog] = React.useState(false);
-  const [workoutName, setWorkoutName] = React.useState("");
+  const [savedWorkouts, setSavedWorkouts] = React.useState([
+    {
+      name: "Workout 1",
+      exercises: [],
+    },
+    {
+      name: "Workout 2",
+      exercises: [],
+    },
+    {
+      name: "Workout 3",
+      exercises: [],
+    },
+  ]);
+  const [workoutName, setWorkoutName] = React.useState("My Workout");
 
   return (
     <div
@@ -115,10 +123,9 @@ const App = () => {
       style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}
     >
       <Router history={history}>
-        {/* <SideBar findResults={findResults} workouts={workouts} /> */}
         <SideBarTemporary
           findResults={findResults}
-          workouts={workouts}
+          exercises={exercises}
           drawer={drawer}
           toggleDrawer={toggleDrawer}
         />
@@ -137,7 +144,10 @@ const App = () => {
               exact
               path="/"
               component={() => (
-                <ExerciseFinder workouts={workouts} findResults={findResults} />
+                <ExerciseFinder
+                  exercises={exercises}
+                  findResults={findResults}
+                />
               )}
             />
             <Route exact path="/record" component={RecordWO} />
@@ -154,6 +164,8 @@ const App = () => {
                   workoutName={workoutName}
                   setWorkoutName={setWorkoutName}
                   setValue={setValue}
+                  savedWorkouts={savedWorkouts}
+                  setSavedWorkouts={setSavedWorkouts}
                 />
               )}
             />

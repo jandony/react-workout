@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExerciseFinder({ workouts, findResults }) {
+export default function ExerciseFinder({ exercises, findResults }) {
   const classes = useStyles();
 
   return (
@@ -59,7 +59,7 @@ export default function ExerciseFinder({ workouts, findResults }) {
             <hr />
           </Typography>
           <Grid container direction="row">
-            {workouts.map((workout, index) => {
+            {exercises.map((workout, index) => {
               if (workout.body === "Upper") {
                 return (
                   <ListItem
@@ -77,6 +77,8 @@ export default function ExerciseFinder({ workouts, findResults }) {
                     />
                   </ListItem>
                 );
+              } else {
+                return null;
               }
             })}
           </Grid>
@@ -88,7 +90,7 @@ export default function ExerciseFinder({ workouts, findResults }) {
             <hr />
           </Typography>
           <Grid container direction="row">
-            {workouts.map((workout, index) => {
+            {exercises.map((workout, index) => {
               if (workout.body === "Lower") {
                 return (
                   <ListItem
@@ -106,6 +108,8 @@ export default function ExerciseFinder({ workouts, findResults }) {
                     />
                   </ListItem>
                 );
+              } else {
+                return null;
               }
             })}
           </Grid>

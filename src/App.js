@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import { Router, Route, Switch } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 
 // Data & Utilities
-import { exercises } from "./Data";
+import { Router, Route, Switch } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import history from "./History";
+import { exercises } from "./Data";
 
-// view components
+// View Components
 import ExerciseFinder from "./Views/ExerciseFinder.jsx";
 import RecordWO from "./Views/RecordWO.jsx";
 import YourWorkouts from "./Views/YourWorkouts.jsx";
 import Results from "./Components/Results/Results.jsx";
 import MusclePage from "./Components/MusclePage/MusclePage.jsx";
 
-// custom components
+// Custom Components
 import AppBar from "@material-ui/core/AppBar";
 import NavBar from "./Components/NavBar/NavBar";
 import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
 
-// custom styles
+// Custom Styles
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 import "./App.css";
@@ -123,7 +123,6 @@ const App = () => {
       style={{ backgroundColor: "lightgrey", minHeight: "98vh" }}
     >
       <Router history={history}>
-        {/* <SideBar findResults={findResults} workouts={workouts} /> */}
         <SideBarTemporary
           findResults={findResults}
           exercises={exercises}

@@ -1,15 +1,17 @@
 import React from "react";
+
+// Utilities
 import { makeStyles } from "@material-ui/core/styles";
 
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+// Material UI Components
 import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
-
-import Snackbar from "@material-ui/core/Snackbar";
+import Grid from "@material-ui/core/Grid";
 import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
+import Typography from "@material-ui/core/Typography";
 
-// custom components
+// Material Icons
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles((theme) => ({
   orContainer: {

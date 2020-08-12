@@ -1,17 +1,17 @@
 import React from "react";
+
+// Utilities
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
+// Material UI Components
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 
-import { Link } from "react-router-dom";
-
-// main component
+// Custom Components
 import { MuscleGroupCard } from "../Components/MuscleGroupCard/MuscleGroupCard";
-
-// custom components
 
 const useStyles = makeStyles((theme) => ({
   orContainer: {

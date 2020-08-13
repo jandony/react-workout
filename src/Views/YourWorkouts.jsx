@@ -82,10 +82,9 @@ export default function YourWorkouts({
   setExercisePage,
   setFormDialog,
   formDialog,
-  workoutName,
-  setWorkoutName,
   setValue,
   savedWorkouts,
+  updateSavedWorkouts,
   setSavedWorkouts,
 }) {
   const classes = useStyles();
@@ -119,13 +118,13 @@ export default function YourWorkouts({
 
   const newWorkout = (event) => {
     event.preventDefault();
+
+    const workoutName = document.querySelector("#workout-name").value;
+    const newWorkout = { name: workoutName, excercises: selectedExercises };
     closeFormDialog();
+    updateSavedWorkouts(newWorkout);
 
-    // const temp = [...savedWorkouts];
-    // const newArray = temp.push({ name: event.target.value, exercises: [] });
-
-    // setSavedWorkouts(newArray);
-
+    console.log(newWorkout);
     console.log("Submitted: " + event.target.value);
   };
 
@@ -157,17 +156,22 @@ export default function YourWorkouts({
           Saved Workouts:
         </Typography>
         <List id="saved-workouts">
-          {savedWorkouts &&
-            savedWorkouts.map((workout) => {
-              return (
-                <ListItem className={classes.paper} divider button>
-                  <ListItemText>{workout.name}</ListItemText>
-                  <IconButton edge="end" aria-label="view">
-                    <ChevronRightIcon />
-                  </IconButton>
-                </ListItem>
-              );
-            })}
+          {savedWorkouts.map((workout, index) => {
+            return (
+              <ListItem
+                className={classes.paper}
+                divider
+                button
+                component={Link}
+                to={`/workout${index + 1}`}
+              >
+                <ListItemText>{workout.name}</ListItemText>
+                <IconButton edge="end" aria-label="view">
+                  <ChevronRightIcon />
+                </IconButton>
+              </ListItem>
+            );
+          })}
         </List>
         <Typography
           variant="subtitle1"

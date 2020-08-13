@@ -1,24 +1,28 @@
 import React, { useState } from "react";
-
-// Data & Utilities
 import { Router, Route, Switch } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import history from "./History";
+
+import AppBar from "@material-ui/core/AppBar";
+
 import { exercises } from "./Data";
 
-// View Components
+import NavBar from "./Components/NavBar/NavBar";
+
+// view components
 import ExerciseFinder from "./Views/ExerciseFinder.jsx";
 import RecordWO from "./Views/RecordWO.jsx";
 import YourWorkouts from "./Views/YourWorkouts.jsx";
+
+// import SideBar from "./Components/SideBar/SideBar.jsx";
+import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
 import Results from "./Components/Results/Results.jsx";
 import MusclePage from "./Components/MusclePage/MusclePage.jsx";
 
-// Custom Components
-import AppBar from "@material-ui/core/AppBar";
-import NavBar from "./Components/NavBar/NavBar";
-import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
+import history from "./History";
 
-// Custom Styles
+// custom components
+
+// custom styles
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 import "./App.css";
@@ -45,7 +49,13 @@ const App = () => {
     slug: "",
   });
 
+  const [savedWorkouts, setSavedWorkouts] = useState([]);
+
   const [selectedExercises, setSelectedExercises] = useState([]);
+
+  const updateSavedWorkouts = (workout) => {
+    setSavedWorkouts([...savedWorkouts, workout]);
+  };
 
   const findResults = (workout) => {
     setResults(workout);
@@ -53,7 +63,7 @@ const App = () => {
 
   const removeExercise = (workout) => {
     const temp = [...selectedExercises];
-    const newArray = temp.filter((i) => i.name !== workout.name);
+    const newArray = temp.filter((i) => i.uniqueID !== workout.uniqueID);
     setSelectedExercises(newArray);
   };
 
@@ -88,11 +98,15 @@ const App = () => {
 
   const selectCard = (workout, name, image) => {
     const newArray = selectedExercises;
+    const uniqueID =
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
     newArray.push({
       name: name,
       image: workout.image,
       cat: results.slug,
       slug: workout.slug,
+      uniqueID: uniqueID,
     });
 
     setOpenSnackbar(true);
@@ -101,21 +115,7 @@ const App = () => {
   };
 
   const [formDialog, setFormDialog] = React.useState(false);
-  const [savedWorkouts, setSavedWorkouts] = React.useState([
-    {
-      name: "Workout 1",
-      exercises: [],
-    },
-    {
-      name: "Workout 2",
-      exercises: [],
-    },
-    {
-      name: "Workout 3",
-      exercises: [],
-    },
-  ]);
-  const [workoutName, setWorkoutName] = React.useState("My Workout");
+  const [workoutName, setWorkoutName] = React.useState("");
 
   return (
     <div
@@ -165,7 +165,7 @@ const App = () => {
                   setWorkoutName={setWorkoutName}
                   setValue={setValue}
                   savedWorkouts={savedWorkouts}
-                  setSavedWorkouts={setSavedWorkouts}
+                  updateSavedWorkouts={updateSavedWorkouts}
                 />
               )}
             />

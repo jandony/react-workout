@@ -131,7 +131,7 @@ export default function Results({
                     onClick={() => selectExercisePage(workout)}
                     button
                     component={Link}
-                    to={`/workout/${workout.slug}`}
+                    to={`/workout/${catName}/${workout.slug}`}
                   >
                     <ListItemAvatar>
                       {/* <Avatar> */}

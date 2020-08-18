@@ -205,7 +205,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/:results"
+              path="/workout/:results"
               component={() => (
                 <Results
                   results={results}
@@ -223,7 +223,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/workout/:name" // I want this to grab the slug from the clicked muscle
+              path="/workout/:category/:name" // I want this to grab the slug from the clicked muscle
               component={() => (
                 <MusclePage
                   exercisePage={exercisePage}

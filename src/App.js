@@ -1,31 +1,46 @@
-import React, { useState } from "react";
-import { Router, Route, Switch } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
 
+// Utilities
+import "./App.css";
+import theme from "./theme";
+import history from "./History";
+import { exercises } from "./Data";
+import { ThemeProvider } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Router, Route, Switch } from "react-router-dom";
+
+// Material UI Components
 import AppBar from "@material-ui/core/AppBar";
 
-import { exercises } from "./Data";
-
-import NavBar from "./Components/NavBar/NavBar";
-
-// view components
-import ExerciseFinder from "./Views/ExerciseFinder.jsx";
+// View Components
 import RecordWO from "./Views/RecordWO.jsx";
 import YourWorkouts from "./Views/YourWorkouts.jsx";
-
-// import SideBar from "./Components/SideBar/SideBar.jsx";
-import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
 import Results from "./Components/Results/Results.jsx";
+import ExerciseFinder from "./Views/ExerciseFinder.jsx";
 import MusclePage from "./Components/MusclePage/MusclePage.jsx";
+import SavedPage from "./Components/SavedPage/SavedPage.jsx";
 
-import history from "./History";
+// Custom Components
+import NavBar from "./Components/NavBar/NavBar";
+import SideBarTemporary from "./Components/SideBar/SideBarTemporary.jsx";
 
-// custom components
+// Firebase Configuration
+import firebase from "firebase";
 
-// custom styles
-import { ThemeProvider } from "@material-ui/core";
-import theme from "./theme";
-import "./App.css";
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyCoL6qmzyOQlhp6bXtM9_DTxueGCwlPcFQ",
+  authDomain: "react-workout-app-756ef.firebaseapp.com",
+  databaseURL: "https://react-workout-app-756ef.firebaseio.com",
+  projectId: "react-workout-app-756ef",
+  storageBucket: "react-workout-app-756ef.appspot.com",
+  messagingSenderId: "517398979636",
+  appId: "1:517398979636:web:9e8a5d9a7d3ba0d8845661",
+  measurementId: "G-NH0HNL4VYL",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -35,6 +50,24 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
   const classes = useStyles();
+
+  const [firebaseData, setFirebaseData] = useState([]);
+  console.log(firebaseData);
+
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("saved-workouts")
+      .onSnapshot((snapshot) => {
+        const newData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setFirebaseData(newData);
+        console.log(newData);
+      });
+  }, []);
 
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -187,10 +220,22 @@ const App = () => {
                 />
               )}
             />
-            <Route
-              path="/:name"
+            {/* <Route
+              path={`/${results}/:name`} // I want this to grab the slug from the clicked muscle
               component={() => (
                 <MusclePage
+                  exercisePage={exercisePage}
+                  results={results}
+                  selectCard={selectCard}
+                  openSnackbar={openSnackbar}
+                />
+              )}
+            /> */}
+            <Route
+              exact
+              path="/saved/:workout"
+              component={() => (
+                <SavedPage
                   exercisePage={exercisePage}
                   results={results}
                   selectCard={selectCard}

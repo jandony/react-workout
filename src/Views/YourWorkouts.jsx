@@ -163,7 +163,7 @@ export default function YourWorkouts({
                 divider
                 button
                 component={Link}
-                to={`/workout${index + 1}`}
+                to={`/saved/workout${index + 1}`}
               >
                 <ListItemText>{workout.name}</ListItemText>
                 <IconButton edge="end" aria-label="view">

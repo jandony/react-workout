@@ -199,6 +199,7 @@ const App = () => {
                   setValue={setValue}
                   savedWorkouts={savedWorkouts}
                   updateSavedWorkouts={updateSavedWorkouts}
+                  setSavedWorkouts={setSavedWorkouts}
                 />
               )}
             />
@@ -220,8 +221,9 @@ const App = () => {
                 />
               )}
             />
-            {/* <Route
-              path={`/${results}/:name`} // I want this to grab the slug from the clicked muscle
+            <Route
+              exact
+              path="/workout/:name" // I want this to grab the slug from the clicked muscle
               component={() => (
                 <MusclePage
                   exercisePage={exercisePage}
@@ -230,18 +232,13 @@ const App = () => {
                   openSnackbar={openSnackbar}
                 />
               )}
-            /> */}
+            />
             <Route
               exact
               path="/saved/:workout"
-              component={() => (
-                <SavedPage
-                  exercisePage={exercisePage}
-                  results={results}
-                  selectCard={selectCard}
-                  openSnackbar={openSnackbar}
-                />
-              )}
+              component={() => {
+                return <SavedPage openSnackbar={openSnackbar} />;
+              }}
             />
           </Switch>
         </ThemeProvider>

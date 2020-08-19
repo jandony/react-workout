@@ -65,7 +65,7 @@ const App = () => {
         }));
 
         setFirebaseData(newData);
-        console.log(newData);
+        setSavedWorkouts(newData);
       });
   }, []);
 
@@ -189,6 +189,7 @@ const App = () => {
               path="/workouts"
               component={() => (
                 <YourWorkouts
+                  findResults={findResults}
                   selectedExercises={selectedExercises}
                   removeExercise={removeExercise}
                   setExercisePage={setExercisePage}
@@ -223,7 +224,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/workout/:category/:name" // I want this to grab the slug from the clicked muscle
+              path="/workout/:category/:name"
               component={() => (
                 <MusclePage
                   exercisePage={exercisePage}
@@ -237,7 +238,9 @@ const App = () => {
               exact
               path="/saved/:workout"
               component={() => {
-                return <SavedPage openSnackbar={openSnackbar} />;
+                return (
+                  <SavedPage results={results} openSnackbar={openSnackbar} />
+                );
               }}
             />
           </Switch>

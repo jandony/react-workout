@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function YourWorkouts({
+  findResults,
   removeExercise,
   selectedExercises,
   setExercisePage,
@@ -155,10 +156,12 @@ export default function YourWorkouts({
               return (
                 <ListItem
                   className={classes.paper}
+                  key={index}
                   divider
                   button
                   component={Link}
                   to={`/saved/${workout.name}`}
+                  onClick={() => findResults(workout)}
                 >
                   <ListItemText>{workout.name}</ListItemText>
                   <IconButton edge="end" aria-label="view">

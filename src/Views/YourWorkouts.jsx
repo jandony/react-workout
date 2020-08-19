@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function YourWorkouts({
+  findResults,
   removeExercise,
   selectedExercises,
   setExercisePage,
@@ -87,6 +88,7 @@ export default function YourWorkouts({
   updateSavedWorkouts,
   setSavedWorkouts,
 }) {
+  // console.log(savedWorkouts);
   const classes = useStyles();
 
   const selectExercisePage = (workout) => {
@@ -107,13 +109,6 @@ export default function YourWorkouts({
 
   const closeFormDialog = () => {
     setFormDialog(false);
-  };
-
-  const handleWorkoutName = (event) => {
-    const temp = [...savedWorkouts];
-    const newArray = temp.push({ name: event.target.value, exercises: [] });
-
-    setSavedWorkouts(newArray);
   };
 
   const newWorkout = (event) => {
@@ -156,22 +151,25 @@ export default function YourWorkouts({
           Saved Workouts:
         </Typography>
         <List id="saved-workouts">
-          {savedWorkouts.map((workout, index) => {
-            return (
-              <ListItem
-                className={classes.paper}
-                divider
-                button
-                component={Link}
-                to={`/workout${index + 1}`}
-              >
-                <ListItemText>{workout.name}</ListItemText>
-                <IconButton edge="end" aria-label="view">
-                  <ChevronRightIcon />
-                </IconButton>
-              </ListItem>
-            );
-          })}
+          {savedWorkouts &&
+            savedWorkouts.map((workout, index) => {
+              return (
+                <ListItem
+                  className={classes.paper}
+                  key={index}
+                  divider
+                  button
+                  component={Link}
+                  to={`/saved/${workout.name}`}
+                  onClick={() => findResults(workout)}
+                >
+                  <ListItemText>{workout.name}</ListItemText>
+                  <IconButton edge="end" aria-label="view">
+                    <ChevronRightIcon />
+                  </IconButton>
+                </ListItem>
+              );
+            })}
         </List>
         <Typography
           variant="subtitle1"
@@ -191,7 +189,7 @@ export default function YourWorkouts({
                     divider
                     button
                     component={Link}
-                    to={`/${workout.cat}/${workout.slug}`}
+                    to={`/workout/${workout.slug}`}
                     onClick={() => selectExercisePage(workout)}
                   >
                     <ListItemAvatar>
@@ -250,7 +248,7 @@ export default function YourWorkouts({
             fullWidth
           >
             <DialogTitle id="form-dialog-title">Save New Workout:</DialogTitle>
-            <form onSubmit={newWorkout}>
+            <form>
               <DialogContent>
                 <TextField
                   autoFocus
@@ -258,7 +256,6 @@ export default function YourWorkouts({
                   id="workout-name"
                   label="Workout Name"
                   type="text"
-                  onChange={handleWorkoutName}
                   fullWidth
                 />
               </DialogContent>
@@ -266,7 +263,9 @@ export default function YourWorkouts({
                 <Button onClick={closeFormDialog} color="primary">
                   Cancel
                 </Button>
-                <Button color="primary">Save</Button>
+                <Button color="primary" onClick={newWorkout}>
+                  Save
+                </Button>
               </DialogActions>
             </form>
           </Dialog>

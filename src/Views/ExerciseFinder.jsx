@@ -66,7 +66,7 @@ export default function ExerciseFinder({ exercises, findResults }) {
                     button
                     key={index}
                     component={Link}
-                    to={`${workout.slug}`}
+                    to={`workout/${workout.slug}`}
                     className={classes.muscleGroup}
                     onClick={() => findResults(workout)}
                   >
@@ -97,7 +97,7 @@ export default function ExerciseFinder({ exercises, findResults }) {
                     button
                     key={index}
                     component={Link}
-                    to={`${workout.slug}`}
+                    to={`workout/${workout.slug}`}
                     className={classes.muscleGroup}
                     onClick={() => findResults(workout)}
                   >
